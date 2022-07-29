@@ -32,9 +32,12 @@ const nextConfig = {
       exclude: /node_modules/,
       use: ['raw-loader', 'glslify-loader'],
     })
-
     return config
   },
+}
+
+nextConfig.compiler = {
+  styledComponents: true,
 }
 
 // manage i18n
