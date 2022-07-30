@@ -1,5 +1,5 @@
 const Piece = () => {
-  return <div className='bg-green-200 border border-black'>field</div>
+  return <div className='border border-black border-double'></div>
 }
 
 export default Piece

@@ -8,7 +8,7 @@ const Shader = dynamic(() => import('@/components/canvas/Shader/Shader'), {
 // dom components goes here
 const Page = (props) => {
   return (
-    <div className=''>
+    <div className='flex justify-center'>
       <Board />
     </div>
   )
