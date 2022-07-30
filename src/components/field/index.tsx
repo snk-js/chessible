@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { pieceImages } from './pieceImages'
 
-const Piece = ({ column, row, value }) => {
+const Field = ({ column, row, value }) => {
   return (
     <div className='border border-black'>
       {pieceImages[value] && <Image src={pieceImages[value]} alt='' />}
@@ -9,4 +9,4 @@ const Piece = ({ column, row, value }) => {
   )
 }
 
-export default Piece
+export default Field

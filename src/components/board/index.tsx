@@ -1,4 +1,4 @@
-import Piece from '../piece'
+import Piece from '../field'
 import Image from 'next/image'
 
 import styled from 'styled-components'
@@ -14,16 +14,19 @@ const BoardFields = styled.div`
   display: grid;
   grid-template-columns: repeat(8, 5vw [grid-start]);
   grid-template-rows: repeat(8, 5vw [grid-start]);
-  @media (max-width: 1200px) {
+  @media (max-width: 1280px) {
     grid-template-columns: repeat(8, 10vw [grid-start]);
     grid-template-rows: repeat(8, 10vw [grid-start]);
+    order: -1;
   }
 `
 
 const BackgroundBoard = styled.div`
   position: absolute;
-  max-width: 80vw;
-  top: 2rem;
+  max-width: 40vw;
+  @media (max-width: 1200px) {
+    max-width: 80vw;
+  }
   background: grey;
   z-index: -1;
 `
@@ -31,12 +34,14 @@ const BackgroundBoard = styled.div`
 const Board = () => {
   const { boardState }: { boardState: BoardState } = useContext(GameContext)
 
+  useEffect(() => {}, [])
+
   return (
     <>
-      <BackgroundBoard>
-        <Image src={board} alt='' />
-      </BackgroundBoard>
-      <BoardFields>
+      <BoardFields className='justify-self-center'>
+        <BackgroundBoard>
+          <Image src={board} alt='' />
+        </BackgroundBoard>
         {GRID.map((row, i) => {
           return GRID.map((column, j) => {
             return (
