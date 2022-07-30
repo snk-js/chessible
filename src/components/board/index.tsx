@@ -2,8 +2,12 @@ import Piece from '../piece'
 import Image from 'next/image'
 
 import styled from 'styled-components'
-
+import { useContext, useEffect } from 'react'
+import { GameContext } from '@/contexts/game'
+import { BoardState } from '@/types/chess'
 import board from '@/assets/board.png'
+
+const GRID = [0, 1, 2, 3, 4, 5, 6, 7]
 
 const BoardFields = styled.div`
   padding: 2rem;
@@ -25,17 +29,26 @@ const BackgroundBoard = styled.div`
 `
 
 const Board = () => {
+  const { boardState }: { boardState: BoardState } = useContext(GameContext)
+
   return (
     <>
       <BackgroundBoard>
         <Image src={board} alt='' />
       </BackgroundBoard>
       <BoardFields>
-        {Array(64)
-          .fill(1)
-          .map((field, i) => {
-            return <Piece key={i}></Piece>
-          })}
+        {GRID.map((row, i) => {
+          return GRID.map((column, j) => {
+            return (
+              <Piece
+                column={column}
+                row={row}
+                key={i + j}
+                value={boardState[row][column]}
+              ></Piece>
+            )
+          })
+        })}
       </BoardFields>
     </>
   )
