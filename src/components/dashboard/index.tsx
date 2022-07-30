@@ -4,7 +4,7 @@ const StyledDashboard = styled.div`
   display: grid;
   padding: 2rem;
   z-index: 100;
-  grid-template-columns: minmax(300px, 300px) minmax(500px, auto) minmax(
+  grid-template-columns: minmax(300px, 300px) minmax(500px, 40vw) minmax(
       300px,
       300px
     );

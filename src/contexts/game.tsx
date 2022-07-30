@@ -6,6 +6,13 @@ const GameContext = createContext(null)
 
 const GameContextProvider = ({ children }) => {
   const [boardState, setBoardState] = useState(boardInitialState())
+
+  const [turn, setTurn] = useState(false)
+
+  const select = ({ row, column }) => {
+    //
+  }
+
   return (
     <GameContext.Provider value={{ boardState }}>
       {children}

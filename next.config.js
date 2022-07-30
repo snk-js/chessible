@@ -2,6 +2,7 @@ const plugins = require('next-compose-plugins')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
+const withImages = require('next-images')
 
 const withOffline = require('next-offline')
 
@@ -82,5 +83,6 @@ module.exports = plugins(
     ],
     withBundleAnalyzer,
   ],
-  nextConfig
+  nextConfig,
+  withImages()
 )
