@@ -1,6 +1,6 @@
 import { createContext, useEffect } from 'react'
 import { useState } from 'react'
-import { boardInitialState } from './constants'
+import { boardInitialState } from '../constants'
 
 const GameContext = createContext(null)
 
