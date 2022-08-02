@@ -9,8 +9,8 @@ const Field = ({ column, row, value }) => {
   }
 
   return (
-    <div className='border border-black'>
-      {pieceImages[value] && <Image src={img} alt='' onClick={handleClick} />}
+    <div className='border border-black' onClick={handleClick}>
+      {pieceImages[value] && <Image src={img} alt='' />}
     </div>
   )
 }

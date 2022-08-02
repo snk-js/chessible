@@ -1,13 +1,13 @@
-import Piece from '../field'
+import Field from '../field'
 import Image from 'next/image'
 
 import styled from 'styled-components'
 import { useContext, useEffect } from 'react'
 import { GameContext } from '@/contexts/game'
-import { BoardState } from '@/types/chess'
+import { IBoardState } from '@/types/chess'
 import board from '@/assets/board.png'
 import Button from '@/components/button'
-
+import { useState } from 'react'
 const GRID = [0, 1, 2, 3, 4, 5, 6, 7]
 
 const BoardFields = styled.div`
@@ -33,42 +33,57 @@ const BackgroundBoard = styled.div`
 `
 const Bar = styled.div`
   position: absolute;
-  transform: translate(0, -2.2rem);
   display: grid;
   grid-template-columns: repeat(5, auto);
   grid-gap: 1rem;
-  margin: 0 0;
+  margin: 0 3rem;
 `
 
 const Board = () => {
-  const { boardState }: { boardState: BoardState } = useContext(GameContext)
+  const {
+    boardState,
+    flipBoard,
+  }: { boardState: IBoardState; flipBoard: () => void } =
+    useContext(GameContext)
 
   useEffect(() => {}, [])
 
+  const flipBoardSide = () => {
+    flipBoard()
+  }
+
   return (
     <>
-      <BoardFields className='justify-self-center'>
+      <Bar>
+        <Button onClick={flipBoard}>flip</Button>
+        <Button>reset</Button>
+        <Button>hello</Button>
+      </Bar>
+      <BoardFields className='justify-self-center' flip={flipBoardSide}>
         <BackgroundBoard>
           <Image src={board} alt='' />
         </BackgroundBoard>
-        <Bar>
-          <Button>reverse</Button>
-          <Button>reset</Button>
-          <Button>hello</Button>
-        </Bar>
-        {GRID.map((row, i) => {
-          return GRID.map((column, j) => {
-            return (
-              <Piece
-                column={column}
-                row={row}
-                key={i + j}
-                value={boardState[row][column]}
-              ></Piece>
-            )
-          })
-        })}
+        <Fields boardState={boardState} />
       </BoardFields>
+    </>
+  )
+}
+
+const Fields = ({ boardState }) => {
+  return (
+    <>
+      {GRID.map((row, i) => {
+        return GRID.map((column, j) => {
+          return (
+            <Field
+              column={column}
+              row={row}
+              key={i + j}
+              value={boardState[row][column]}
+            />
+          )
+        })
+      })}
     </>
   )
 }

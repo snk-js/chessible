@@ -14,15 +14,7 @@ export const PieceType = {
   none: null,
 }
 
-const pieceMove = {}
-
-const gridLen = [0, 1, 2, 3, 4, 5, 6, 7]
-
-type IBoardState<Length, PieceTypes> = {
-  [Index in keyof Length]: [keyof PieceTypes] | null
-}
-
-export type BoardState = IBoardState<typeof gridLen, typeof PieceType>
+export type IBoardState = string[][]
 
 export enum PieceColor {
   WHITE,

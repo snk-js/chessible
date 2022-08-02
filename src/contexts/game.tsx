@@ -1,6 +1,6 @@
 import { createContext, useEffect } from 'react'
 import { useState } from 'react'
-import { boardInitialState } from '../constants'
+import { boardInitialState, flip } from './gameState'
 
 const GameContext = createContext(null)
 
@@ -9,12 +9,16 @@ const GameContextProvider = ({ children }) => {
 
   const [turn, setTurn] = useState(false)
 
+  const flipBoard = () => {
+    setBoardState(flip(boardState))
+  }
+
   const select = ({ row, column }) => {
     //
   }
 
   return (
-    <GameContext.Provider value={{ boardState }}>
+    <GameContext.Provider value={{ boardState, flipBoard }}>
       {children}
     </GameContext.Provider>
   )

@@ -65,4 +65,27 @@ describe('return all possible moves given a origin and piece', () => {
     ]
     expect(result).toEqual(expect.arrayContaining(answer))
   })
+
+  it('should return valid moves for bishop at [4,5] on the border', () => {
+    // simulate queen at [0,0]
+    const result = genPossibleMoves('b', [4, 5])
+
+    const answer = [
+      // vertical on the first column
+      [5, 6],
+      [6, 7],
+      [3, 4],
+      [2, 3],
+      [1, 2],
+      [0, 1],
+
+      [0, 1],
+      [0, 1],
+      [0, 1],
+      [0, 1],
+    ]
+
+    console.log(result)
+    expect(result).toEqual(expect.arrayContaining(answer))
+  })
 })
