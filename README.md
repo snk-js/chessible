@@ -12,11 +12,11 @@ Modern times require modern solutions.
 Further goals include gamefy as a platform for state-of-art user experience, with progressive improvements, status, item rarity, and different pieces to collect along with the time.
 
 ### technical differential features:
--- (in development) the ability to schedule attacks and defenses after the enemy plays
--- (in development) action points to spend between attack, defense, and movement
--- (in development) choose spending action points between before and after the next enemy turn
--- (in development) use WebGL to render state-of-art panels, board and pieces
--- user experience first
+- (in development) the ability to schedule attacks and defenses after the enemy plays
+- (in development) action points to spend between attack, defense, and movement
+- (in development) choose spending action points between before and after the next enemy turn
+- (in development) use WebGL to render state-of-art panels, board and pieces
+- user experience first
 
 
 
