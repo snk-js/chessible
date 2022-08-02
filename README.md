@@ -16,7 +16,6 @@ Further goals include gamefy as a platform for state-of-art user experience, wit
 - (in development) action points to spend between attack, defense, and movement
 - (in development) choose spending action points between before and after the next enemy turn
 - (in development) use WebGL to render state-of-art panels, board and pieces
-- user experience first
 
 
 
