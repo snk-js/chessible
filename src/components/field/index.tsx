@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { pieceImages } from './pieceImages'
 
-const Field = ({ column, row, value }) => {
+const Field = ({ column, row, value, id }) => {
   const img = pieceImages[value]
 
   const handleClick = () => {
@@ -9,8 +9,17 @@ const Field = ({ column, row, value }) => {
   }
 
   return (
-    <div className='border border-black' onClick={handleClick}>
-      {pieceImages[value] && <Image src={img} alt='' />}
+    <div
+      className={`border border-[#30ffff] ${
+        id % 2 !== 0 ? 'bg-[#09ffff2f]' : ''
+      } `}
+      onClick={handleClick}
+    >
+      {pieceImages[value] && (
+        <div className=''>
+          <Image src={img} alt='' />
+        </div>
+      )}
     </div>
   )
 }

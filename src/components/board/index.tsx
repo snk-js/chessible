@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 import styled from 'styled-components'
 import { useContext, useEffect } from 'react'
-import { GameContext } from '@/contexts/game'
+import { GameContext } from '@/gameContext/game'
 import { IBoardState } from '@/types/chess'
 import board from '@/assets/board.png'
 import Button from '@/components/button'
@@ -60,9 +60,9 @@ const Board = () => {
         <Button>hello</Button>
       </Bar>
       <BoardFields className='justify-self-center' flip={flipBoardSide}>
-        <BackgroundBoard>
+        {/* <BackgroundBoard>
           <Image src={board} alt='' />
-        </BackgroundBoard>
+        </BackgroundBoard> */}
         <Fields boardState={boardState} />
       </BoardFields>
     </>
@@ -78,6 +78,7 @@ const Fields = ({ boardState }) => {
             <Field
               column={column}
               row={row}
+              id={i + j}
               key={i + j}
               value={boardState[row][column]}
             />

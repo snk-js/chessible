@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic'
 import Board from '@/components/board'
-import { GameContextProvider } from '@/contexts/game'
+import { GameContextProvider } from '@/gameContext/game'
 import Dashboard from '@/components/dashboard'
 import styled from 'styled-components'
 import Image from 'next/image'

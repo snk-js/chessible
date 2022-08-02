@@ -1,4 +1,4 @@
-import { genPossibleMoves } from '@/utils/move'
+import { genPossibleMoves } from '@/gameContext/move'
 
 describe('return all possible moves given a origin and piece', () => {
   it('should return valid moves for queen at [0,0] of the border', () => {
