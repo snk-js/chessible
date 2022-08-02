@@ -33,15 +33,6 @@ export const genPossibleMoves = (piece: string, origin: Vector) => {
     ? dir.map((move) => {
         let [x, y] = origin
 
-        if (
-          x + move[0] === -1 ||
-          y + move[1] === -1 ||
-          x + move[0] === 8 ||
-          y + move[1] === 8
-        ) {
-          return
-        }
-
         while (x >= 0 && y >= 0 && x <= 7 && y <= 7) {
           direction.push([(x += move[0]), (y += move[1])])
         }
@@ -51,5 +42,5 @@ export const genPossibleMoves = (piece: string, origin: Vector) => {
         direction.push([(x += move[0]), (y += move[1])])
       })
 
-  return direction
+  return direction.filter((move) => !move.includes(-1) && !move.includes(8))
 }
