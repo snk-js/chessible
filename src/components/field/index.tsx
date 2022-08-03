@@ -1,8 +1,12 @@
 import Image from 'next/image'
-import { pieceImages } from '../../models/piece/pieceImages'
+import { useEffect, useState } from 'react'
 
 const Field = ({ column, row, piece, id }) => {
-  const img = piece?.img
+  const [pieceState, setPiece] = useState(piece)
+
+  useEffect(() => {
+    setPiece(piece)
+  }, [piece])
 
   const handleClick = () => {
     console.log(`${column}${row}`)
@@ -15,9 +19,9 @@ const Field = ({ column, row, piece, id }) => {
       } `}
       onClick={handleClick}
     >
-      {img && (
+      {pieceState?.img && (
         <div className=''>
-          <Image src={img} alt='' />
+          <Image src={pieceState?.img} alt='' />
         </div>
       )}
     </div>

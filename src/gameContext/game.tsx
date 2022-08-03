@@ -3,14 +3,14 @@ import { useState } from 'react'
 
 import Board from '@/models/board'
 
-const thisBoard = new Board()
 const GameContext = createContext(null)
 
 const GameContextProvider = ({ children }) => {
-  const [boardState, setBoardState] = useState(thisBoard.state)
+  const [board] = useState(new Board())
+  const [boardState, setBoardState] = useState(board.state)
 
   const flipBoard = () => {
-    thisBoard.flip()
+    setBoardState(board.flip().state)
   }
 
   const select = ({ row, column }) => {

@@ -20,6 +20,7 @@ class Board {
       )
     })
     this.state = newState
+    return this
   }
 }
 

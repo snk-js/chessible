@@ -46,8 +46,6 @@ const Board = () => {
   }: { boardState: IBoardState; flipBoard: () => void } =
     useContext(GameContext)
 
-  useEffect(() => {}, [])
-
   const flipBoardSide = () => {
     flipBoard()
   }
