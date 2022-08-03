@@ -1,8 +1,8 @@
 import Image from 'next/image'
-import { pieceImages } from './pieceImages'
+import { pieceImages } from '../../models/piece/pieceImages'
 
-const Field = ({ column, row, value, id }) => {
-  const img = pieceImages[value]
+const Field = ({ column, row, piece, id }) => {
+  const img = piece?.img
 
   const handleClick = () => {
     console.log(`${column}${row}`)
@@ -15,7 +15,7 @@ const Field = ({ column, row, value, id }) => {
       } `}
       onClick={handleClick}
     >
-      {pieceImages[value] && (
+      {img && (
         <div className=''>
           <Image src={img} alt='' />
         </div>

@@ -1,16 +1,16 @@
 import { createContext, useEffect } from 'react'
 import { useState } from 'react'
-import { boardInitialState, flip } from './gameState'
 
+import Board from '@/models/board'
+
+const thisBoard = new Board()
 const GameContext = createContext(null)
 
 const GameContextProvider = ({ children }) => {
-  const [boardState, setBoardState] = useState(boardInitialState())
-
-  const [turn, setTurn] = useState(false)
+  const [boardState, setBoardState] = useState(thisBoard.state)
 
   const flipBoard = () => {
-    setBoardState(flip(boardState))
+    thisBoard.flip()
   }
 
   const select = ({ row, column }) => {

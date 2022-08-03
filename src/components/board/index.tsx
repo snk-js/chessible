@@ -74,13 +74,14 @@ const Fields = ({ boardState }) => {
     <>
       {GRID.map((row, i) => {
         return GRID.map((column, j) => {
+          const piece = boardState[row][column]
           return (
             <Field
               column={column}
               row={row}
               id={i + j}
               key={i + j}
-              value={boardState[row][column]}
+              piece={piece}
             />
           )
         })
