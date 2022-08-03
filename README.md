@@ -6,7 +6,7 @@ Chessible is an RPG-based gamification dApp of the classic chess game, dApp mean
 I'm trying to make a chess game from scratch, but with additional features to make the game more dynamic and creative rather than purely logical and intricate. As the community around chess game grows, it is common to get bored with the always same game style, and chess players have an urge to expand their creativity into tactics. Furthermore, with the decentralized internet coming strong to ease virtual assets management, the platform also intends to make a collection of rare pieces and boards available and optionally gamble in matches against other players.
 
 ### why would people like such a bizarre thing?
-Modern times require modern solutions.
+I don't know, doing this just for fun and learning.
 
 ### If Chessible receives approval, what then?
 Further goals include gamefy as a platform for state-of-art user experience, with progressive improvements, status, item rarity, and different pieces to collect along with the time.
