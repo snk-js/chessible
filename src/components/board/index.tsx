@@ -8,6 +8,7 @@ import { IBoardState } from '@/types/chess'
 import board from '@/assets/board.png'
 import Button from '@/components/button'
 import { useState } from 'react'
+import Piece from '@/models/piece'
 const GRID = [0, 1, 2, 3, 4, 5, 6, 7]
 
 const BoardFields = styled.div`
@@ -46,10 +47,16 @@ const Board = () => {
   }: { boardState: IBoardState; flipBoard: () => void } =
     useContext(GameContext)
 
+  const [highlightedFields, setHighlightedFields] = useState([])
+
   const flipBoardSide = () => {
     flipBoard()
   }
 
+  const handleSelect = (moves) => {
+    setHighlightedFields(moves)
+    console.log(moves)
+  }
   return (
     <>
       <Bar>
@@ -61,20 +68,27 @@ const Board = () => {
         {/* <BackgroundBoard>
           <Image src={board} alt='' />
         </BackgroundBoard> */}
-        <Fields boardState={boardState} />
+        <Fields
+          boardState={boardState}
+          highlightedFields={highlightedFields}
+          handleSelect={handleSelect}
+        />
       </BoardFields>
     </>
   )
 }
 
-const Fields = ({ boardState }) => {
+const Fields = ({ boardState, highlightedFields, handleSelect }) => {
   return (
     <>
       {GRID.map((row, i) => {
         return GRID.map((column, j) => {
-          const piece = boardState[row][column]
+          const selected = highlightedFields?.includes([row, column])
+          const piece: Piece = boardState[row][column]
           return (
             <Field
+              selected={selected}
+              handleSelect={handleSelect}
               column={column}
               row={row}
               id={i + j}

@@ -8,14 +8,14 @@ export const EAST = [1, 0]
 export const WEST = [-1, 0]
 
 export const L = [
-  [2, 1],
-  [2, -1],
-  [1, 2],
-  [1, -2],
-  [-2, 1],
-  [-2, -1],
-  [1, -2],
-  [-1, -2],
+  [3, 1],
+  [3, -1],
+  [1, 3],
+  [1, -3],
+  [-3, 1],
+  [-3, -1],
+  [1, -3],
+  [-1, -3],
 ]
 
 export const DIAGONAL = [NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST]

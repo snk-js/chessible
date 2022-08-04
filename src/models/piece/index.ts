@@ -1,8 +1,10 @@
 import { pieceImages } from './pieceImages'
+import { genPossibleMoves } from '@/gameContext/move'
 
 class Piece {
   img: string
   role: string
+  default_moves: [number, number][] | number[]
   constructor(role: string) {
     this.role = role
     this.img = pieceImages[role]
@@ -15,6 +17,10 @@ class Piece {
     this.role = newRole
     this.img = pieceImages[newRole]
     return this
+  }
+
+  moves(origin) {
+    return genPossibleMoves(this.role, origin)
   }
 }
 
