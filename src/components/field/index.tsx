@@ -1,34 +1,47 @@
 import Piece from '@/models/piece'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
+import { useContext } from 'react'
+import { GameContext } from '@/gameContext/game'
+import { GameContextFeatures } from '@/gameContext/game'
+
+type Vector = [number, number]
+type handleSelectArgs = {
+  moves: Vector[]
+  piece: Piece | null
+}
 
 type Field = {
   column: number
   row: number
   piece: Piece | null
   id: number
-  selected: boolean
-  handleSelect: (moves: number[][]) => void
-  resetHightlight: () => void
 }
 
-const Field = ({
-  column,
-  row,
-  piece,
-  id,
-  selected,
-  handleSelect,
-  resetHightlight,
-}: Field) => {
+const Field = ({ column, row, piece, id }: Field) => {
   const [pieceState, setPiece] = useState(piece)
+  const {
+    isFieldHightLighted,
+    handleSelectPiece,
+    resetHightlight,
+  }: GameContextFeatures = useContext(GameContext)
+
+  const isHighlighted = isFieldHightLighted(row, column)
 
   useEffect(() => {
     setPiece(piece)
   }, [piece])
 
   const handleClick = () => {
-    piece ? handleSelect(piece?.moves([row, column])) : resetHightlight()
+    if (isHighlighted && piece) {
+      // do something
+    }
+
+    if (isHighlighted) {
+      console.log('hehe')
+    }
+
+    piece ? handleSelectPiece([row, column]) : resetHightlight()
   }
   const pieceImg = pieceState?.img
 
@@ -36,7 +49,7 @@ const Field = ({
     <div
       className={`border border-[#30ffff] ${
         id % 2 !== 0 ? 'bg-[#09ffff2f]' : ''
-      } ${selected ? 'bg-black' : ''}`}
+      } ${isHighlighted ? 'bg-black' : ''}`}
       onClick={handleClick}
     >
       {pieceImg ? <PieceImage img={pieceImg} /> : <></>}

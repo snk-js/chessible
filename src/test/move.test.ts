@@ -3,7 +3,7 @@ import { genPossibleMoves } from '@/gameContext/move'
 describe('return all possible moves given a origin and piece', () => {
   it('should return valid moves for queen at [0,0] of the border', () => {
     // simulate queen at [0,0]
-    const result = genPossibleMoves('wq', [0, 0])
+    const result = genPossibleMoves('wq')
     const answer = [
       // vertical on the first column
       [1, 0],
@@ -35,7 +35,7 @@ describe('return all possible moves given a origin and piece', () => {
 
   it('should return valid moves for queen at [7,7] of the border', () => {
     // simulate queen at [0,0]
-    const result = genPossibleMoves('wq', [7, 7])
+    const result = genPossibleMoves('wq')
 
     const answer = [
       // vertical on the first column

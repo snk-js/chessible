@@ -25,7 +25,7 @@ class Piece {
     this.location = newLocation
   }
 
-  moves(origin) {
+  moves() {
     return genPossibleMoves(this)
   }
 }

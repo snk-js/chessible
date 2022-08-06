@@ -14,8 +14,6 @@ export const PieceType = {
   none: null,
 }
 
-export type IBoardState = string[][]
-
 export enum PieceColor {
   WHITE,
   BLACK,

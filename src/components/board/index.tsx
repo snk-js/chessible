@@ -3,10 +3,11 @@ import Field from '../field'
 import styled from 'styled-components'
 import { useContext, useEffect } from 'react'
 import { GameContext } from '@/gameContext/game'
-import { IBoardState } from '@/types/chess'
 import Button from '@/components/button'
 import { useState } from 'react'
 import Piece from '@/models/piece'
+import { GameContextFeatures } from '@/gameContext/game'
+
 const GRID = [0, 1, 2, 3, 4, 5, 6, 7]
 
 const BoardFields = styled.div`
@@ -30,29 +31,12 @@ const Bar = styled.div`
 `
 
 const Board = () => {
-  const {
-    boardState,
-    flipBoard,
-  }: { boardState: IBoardState; flipBoard: () => void } =
-    useContext(GameContext)
-
-  const [highlightedFields, setHighlightedFields] = useState([])
-
-  useEffect(() => {
-    console.log({ highlightedFields })
-  }, [highlightedFields, setHighlightedFields])
+  const { boardState, flipBoard }: GameContextFeatures = useContext(GameContext)
 
   const flipBoardSide = () => {
     flipBoard()
   }
 
-  const resetHightlight = () => {
-    setHighlightedFields([])
-  }
-
-  const handleSelect = (moves) => {
-    setHighlightedFields(moves)
-  }
   return (
     <>
       <Bar>
@@ -64,41 +48,25 @@ const Board = () => {
         {/* <BackgroundBoard>
           <Image src={board} alt='' />
         </BackgroundBoard> */}
-        <Fields
-          boardState={boardState}
-          highlightedFields={highlightedFields}
-          handleSelect={handleSelect}
-          resetHightlight={resetHightlight}
-        />
+        <Fields boardState={boardState} />
       </BoardFields>
     </>
   )
 }
 
-const Fields = ({
-  boardState,
-  highlightedFields,
-  handleSelect,
-  resetHightlight,
-}) => {
+const Fields = ({ boardState }) => {
   return (
     <>
       {GRID.map((row, i) => {
         return GRID.map((column, j) => {
-          const selected = highlightedFields.some(
-            (move) => move[0] === row && move[1] === column
-          )
           const piece: Piece | null = boardState[row][column]
           return (
             <Field
-              selected={selected}
-              handleSelect={handleSelect}
               column={column}
               row={row}
               id={i + j}
               key={i + j}
               piece={piece}
-              resetHightlight={resetHightlight}
             />
           )
         })
