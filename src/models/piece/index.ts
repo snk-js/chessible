@@ -3,11 +3,13 @@ import { genPossibleMoves } from '@/gameContext/move'
 
 class Piece {
   img: string
-  role: string
-  default_moves: [number, number][] | number[]
-  constructor(role: string) {
+  role: string // wb - (white bishop)
+  location: [number, number]
+
+  constructor(role: string, location: [number, number]) {
     this.role = role
     this.img = pieceImages[role]
+    this.location = location
   }
 
   exchangeRole() {
@@ -20,7 +22,7 @@ class Piece {
   }
 
   moves(origin) {
-    return genPossibleMoves(this.role, origin)
+    return genPossibleMoves(this.role, this.location)
   }
 }
 

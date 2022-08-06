@@ -1,6 +1,6 @@
 import * as DIRECTIONS from '../constants'
 
-type Vector = number[]
+type Vector = [number, number]
 type Coordinates = Array<Vector>
 
 export const getDirectionByPiece = (piece: string) => {
@@ -19,42 +19,26 @@ export const getDirectionByPiece = (piece: string) => {
 }
 
 export const genPossibleMoves = (piece: string, origin: Vector) => {
-  let direction = []
-  const dir = getDirectionByPiece(piece)
-  const extendMoves = ['wb', 'wq', 'wr', 'bb', 'bq', 'br'].includes(piece)
+  let dir = getDirectionByPiece(piece)
+  const scalar_move = ['wb', 'wq', 'wr', 'bb', 'bq', 'br'].includes(piece)
 
-  if (piece.includes('p')) {
-    if (piece.includes('w')) {
-      if (origin[0] === 6) {
-        return [
-          [0, 1],
-          [0, 2],
-        ]
-      } else {
-        return [0, 1]
-      }
-    }
-    if (piece.includes('b')) {
-      if (origin[0] === 1)
-        return [
-          [0, -1],
-          [0, -2],
-        ]
-    } else return [[0, -1]]
-  }
+  return genMoves(origin, dir, scalar_move)
+}
 
-  extendMoves
-    ? dir.map((move) => {
+const genMoves = (origin, directions, expand): Coordinates => {
+  const result = []
+
+  expand
+    ? directions.map((move) => {
         let [x, y] = origin
 
         while (x >= 0 && y >= 0 && x <= 7 && y <= 7) {
-          direction.push([(x += move[0]), (y += move[1])])
+          result.push([(x += move[0]), (y += move[1])])
         }
       })
-    : dir.map((move) => {
+    : directions.map((move) => {
         let [x, y] = origin
-        direction.push([(x += move[0]), (y += move[1])])
+        result.push([(x += move[0]), (y += move[1])])
       })
-
-  return direction.filter((move) => !move.includes(-1) && !move.includes(8))
+  return result
 }

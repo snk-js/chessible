@@ -8,10 +8,15 @@ const GameContext = createContext(null)
 const GameContextProvider = ({ children }) => {
   const [board] = useState(new Board())
   const [boardState, setBoardState] = useState(board.state)
+  const [countTurn, setCountTurn] = useState([{}])
 
   const flipBoard = () => {
     setBoardState(board.flip().state)
   }
+
+  useEffect(() => {
+    console.log(board)
+  }, [])
 
   const select = ({ row, column }) => {
     //

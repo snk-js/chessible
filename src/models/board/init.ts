@@ -1,55 +1,24 @@
 const GRID = [0, 1, 2, 3, 4, 5, 6, 7]
 // epic chess
-import { PieceType } from '@/types/chess'
 import Piece from '@/models/piece'
 
-const { bb, bk, bn, bp, bq, br, wb, wk, wn, wp, wq, wr } = PieceType
+const pieceOrder = (revert?) => {
+  const pawns = ['p', 'p', 'p', 'p', 'p', 'p', 'p', 'p']
+  const rest = ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r']
+  return revert ? [...pawns, ...rest] : [...rest, ...pawns]
+}
 
-export const initialize_board = (): Piece[][] =>
-  GRID.map((row) => {
-    if (row === 0)
-      return [
-        new Piece(br),
-        new Piece(bn),
-        new Piece(bb),
-        new Piece(bq),
-        new Piece(bk),
-        new Piece(bb),
-        new Piece(bn),
-        new Piece(br),
-      ]
-    if (row === 1)
-      return [
-        new Piece(bp),
-        new Piece(bp),
-        new Piece(bp),
-        new Piece(bp),
-        new Piece(bp),
-        new Piece(bp),
-        new Piece(bp),
-        new Piece(bp),
-      ]
-    if (row === 6)
-      return [
-        new Piece(wp),
-        new Piece(wp),
-        new Piece(wp),
-        new Piece(wp),
-        new Piece(wp),
-        new Piece(wp),
-        new Piece(wp),
-        new Piece(wp),
-      ]
-    if (row === 7)
-      return [
-        new Piece(wr),
-        new Piece(wn),
-        new Piece(wb),
-        new Piece(wq),
-        new Piece(wk),
-        new Piece(wb),
-        new Piece(wn),
-        new Piece(wr),
-      ]
-    return [null, null, null, null, null, null, null, null]
+const fieldHosts = (pieceClan, revert?) =>
+  Array(pieceOrder().length)
+    .fill(pieceClan)
+    .map((clan, i) => (pieceOrder()[i] ? clan + pieceOrder(revert)[i] : null))
+
+const createVoid = Array(32).fill(null)
+const hosts = [...fieldHosts('b'), ...createVoid, ...fieldHosts('w', true)]
+
+export const initialize_board = (): Piece[][] => {
+  const tmp = hosts
+  return GRID.map((i) => {
+    return GRID.map((k) => new Piece(tmp.shift(), [i, k]))
   })
+}

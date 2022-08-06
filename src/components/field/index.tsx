@@ -8,7 +8,7 @@ type Field = {
   piece: Piece | null
   id: number
   selected: boolean
-  handleSelect: (moves: [number, number][]) => void
+  handleSelect: (moves: number[][]) => void
 }
 
 const Field = ({ column, row, piece, id, selected, handleSelect }: Field) => {
@@ -19,7 +19,8 @@ const Field = ({ column, row, piece, id, selected, handleSelect }: Field) => {
   }, [piece])
 
   const handleClick = () => {
-    handleSelect(piece?.moves([column, row]))
+    console.log(row, column)
+    handleSelect(piece?.moves([row, column]))
   }
 
   return (
