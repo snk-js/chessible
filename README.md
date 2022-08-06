@@ -11,7 +11,7 @@ I don't know, doing this just for fun and learning.
 ### If Chessible receives approval, what then?
 Further goals include gamefy as a platform for state-of-art user experience, with progressive improvements, status, item rarity, and different pieces to collect along with the time.
 
-### technical differential features:
+## Features / User Stories
 #### `Engine / Backend`
 - [x] basic layout for board, pieces and background ✅
 - [x] scalable game initialization and movement setup ✅
