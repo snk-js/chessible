@@ -26,7 +26,6 @@ Further goals include gamefy as a platform for state-of-art user experience, wit
 
 #### `User Experience / Frontend`
 - [ ] UI/UX layout
-- [ ] UI/UX
 - [ ] UI/UX panel
 - [ ] use WebGL to render state-of-art panels, board and pieces
 - [ ] UI/UX collectible Boards and pieces
