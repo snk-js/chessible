@@ -24,6 +24,8 @@ const Field = ({ column, row, piece, id }: Field) => {
     isFieldHightLighted,
     handleSelectPiece,
     resetHightlight,
+    highlightedFields,
+    movePieceTo,
   }: GameContextFeatures = useContext(GameContext)
 
   const isHighlighted = isFieldHightLighted(row, column)
@@ -38,7 +40,7 @@ const Field = ({ column, row, piece, id }: Field) => {
     }
 
     if (isHighlighted) {
-      console.log('hehe')
+      movePieceTo(highlightedFields.piece.position, [row, column])
     }
 
     piece ? handleSelectPiece([row, column]) : resetHightlight()

@@ -1,13 +1,20 @@
 import Piece from '@/models/piece'
 import { initialize_board } from './init'
+import { swapPiece } from './utils'
 
 export type BoardFields = (Piece | null)[][]
+export type Vector = [number, number]
 
 class Board {
   state: BoardFields
 
   constructor() {
     this.state = initialize_board()
+  }
+
+  movePieceTo(origin: Vector, destination: Vector) {
+    this.state = swapPiece(origin, destination, this.state)
+    return this.state
   }
 
   flip() {

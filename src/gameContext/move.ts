@@ -62,7 +62,7 @@ const genMoves = (origin, directions, expand): Coordinates => {
 
 export const genPossibleMoves = (piece: Piece) => {
   const pieceRole = piece.role
-  const pieceOrigin = piece.location
+  const pieceOrigin = piece.position
   const dir = getDirectionByPiece(pieceRole, pieceOrigin)
   const scalar_move = ['wb', 'wq', 'wr', 'bb', 'bq', 'br'].includes(pieceRole)
   return genMoves(pieceOrigin, dir, scalar_move)

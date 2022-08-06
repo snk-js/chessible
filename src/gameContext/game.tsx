@@ -5,6 +5,8 @@ import Piece from '@/models/piece'
 
 const GameContext = createContext(null)
 
+type Vector = [number, number]
+
 type HightlighFeat = {
   moves: [number, number][]
   piece: Piece
@@ -40,6 +42,10 @@ const GameContextProvider = ({ children }) => {
     setBoardState(board.flip().state)
   }
 
+  const movePieceTo = (origin: Vector, destination: Vector) => {
+    setBoardState(board.movePieceTo(origin, destination))
+  }
+
   return (
     <GameContext.Provider
       value={{
@@ -50,6 +56,7 @@ const GameContextProvider = ({ children }) => {
         handleSelectPiece,
         highlightedFields,
         isFieldHightLighted,
+        movePieceTo,
       }}
     >
       {children}
@@ -60,9 +67,11 @@ const GameContextProvider = ({ children }) => {
 export type GameContextFeatures = {
   boardState: BoardFields
   flipBoard: () => void
+  highlightedFields: HightlighFeat
   resetHightlight: () => void
-  handleSelectPiece: (position: [number, number]) => void
+  handleSelectPiece: (position: Vector) => void
   isFieldHightLighted: (row: number, column: number) => boolean
+  movePieceTo: (origin: Vector, destination: Vector) => void
 }
 
 export { GameContextProvider, GameContext }

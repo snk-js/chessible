@@ -1,15 +1,20 @@
 import { pieceImages } from './pieceImages'
 import { genPossibleMoves } from '@/gameContext/move'
-
+import { Vector } from '@/models/board'
 class Piece {
   img: string
   role: string // wb - (white bishop)
-  location: [number, number]
+  position: Vector
 
-  constructor(role: string, location: [number, number]) {
+  constructor(role: string, position: Vector) {
     this.role = role
     this.img = pieceImages[role]
-    this.location = location
+    this.position = position
+  }
+
+  changePosition(position: Vector) {
+    this.position = position
+    return this
   }
 
   exchangeRole() {
@@ -21,8 +26,8 @@ class Piece {
     return this
   }
 
-  move(newLocation: [number, number]) {
-    this.location = newLocation
+  move(newPosition: Vector) {
+    this.position = newPosition
   }
 
   moves() {
