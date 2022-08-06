@@ -14,33 +14,33 @@ Further goals include gamefy as a platform for state-of-art user experience, wit
 ### technical differential features:
 #### --- Engine / Backend ---
 - (in development)
--- [✅] basic layout for board, pieces and background
--- [✅] scalable game initialization and movement setup
--- [ ] setup turns
--- [ ] movement feature
--- [ ] attack feature
--- [ ] defense feature
--- [ ] the ability to schedule attacks and defenses after the enemy plays
--- [ ] action points to spend between attack, defense, and movement
--- [ ] choose spending action points between before and after the next enemy turn
--- [ ] match with another online player
+- [x] basic layout for board, pieces and background
+- [x] scalable game initialization and movement setup
+- [ ] setup turns
+- [ ] movement feature
+- [ ] attack feature
+- [ ] defense feature
+- [ ] the ability to schedule attacks and defenses after the enemy plays
+- [ ] action points to spend between attack, defense, and movement
+- [ ] choose spending action points between before and after the next enemy turn
+- [ ] match with another online player
 
 #### --- User Experience / Frontend ---
--- [ ] UI/UX layout
--- [ ] UI/UX
--- [ ] UI/UX panel
--- [ ] use WebGL to render state-of-art panels, board and pieces
--- [ ] UI/UX collectible Boards and pieces
--- [ ] attack finalization, movement and defense effects
--- [ ] TODO: Plan pieces have characteristcs and traits
--- [ ] TODO: Plan gradual progress
--- [ ] TODO: Plan AI to challenge humans
--- [ ] TODO: Plan Hero Journey on Plataform and storyline
+- [ ] UI/UX layout
+- [ ] UI/UX
+- [ ] UI/UX panel
+- [ ] use WebGL to render state-of-art panels, board and pieces
+- [ ] UI/UX collectible Boards and pieces
+- [ ] attack finalization, movement and defense effects
+- [ ] TODO: Plan pieces have characteristcs and traits
+- [ ] TODO: Plan gradual progress
+- [ ] TODO: Plan AI to challenge humans
+- [ ] TODO: Plan Hero Journey on Plataform and storyline
 
-#### --- Web3 / Tokenomics
--- [ ] apply marketplace strategy
--- [ ] connect wallet / vendors / deFi providers
--- [ ] TODO: finish roadmap
+####  --- Web3 / Tokenomics ---
+- [ ] apply marketplace strategy
+- [ ] connect wallet / vendors / deFi providers
+- [ ] TODO: finish roadmap
  
 
 
