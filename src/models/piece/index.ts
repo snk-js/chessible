@@ -21,8 +21,12 @@ class Piece {
     return this
   }
 
+  move(newLocation: [number, number]) {
+    this.location = newLocation
+  }
+
   moves(origin) {
-    return genPossibleMoves(this.role, this.location)
+    return genPossibleMoves(this)
   }
 }
 

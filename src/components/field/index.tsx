@@ -9,9 +9,18 @@ type Field = {
   id: number
   selected: boolean
   handleSelect: (moves: number[][]) => void
+  resetHightlight: () => void
 }
 
-const Field = ({ column, row, piece, id, selected, handleSelect }: Field) => {
+const Field = ({
+  column,
+  row,
+  piece,
+  id,
+  selected,
+  handleSelect,
+  resetHightlight,
+}: Field) => {
   const [pieceState, setPiece] = useState(piece)
 
   useEffect(() => {
@@ -19,8 +28,7 @@ const Field = ({ column, row, piece, id, selected, handleSelect }: Field) => {
   }, [piece])
 
   const handleClick = () => {
-    console.log(row, column)
-    handleSelect(piece?.moves([row, column]))
+    piece ? handleSelect(piece?.moves([row, column])) : resetHightlight()
   }
 
   return (

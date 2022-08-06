@@ -49,13 +49,20 @@ const Board = () => {
 
   const [highlightedFields, setHighlightedFields] = useState([])
 
+  useEffect(() => {
+    console.log({ highlightedFields })
+  }, [highlightedFields, setHighlightedFields])
+
   const flipBoardSide = () => {
     flipBoard()
   }
 
+  const resetHightlight = () => {
+    setHighlightedFields([])
+  }
+
   const handleSelect = (moves) => {
     setHighlightedFields(moves)
-    console.log(moves)
   }
   return (
     <>
@@ -72,19 +79,27 @@ const Board = () => {
           boardState={boardState}
           highlightedFields={highlightedFields}
           handleSelect={handleSelect}
+          resetHightlight={resetHightlight}
         />
       </BoardFields>
     </>
   )
 }
 
-const Fields = ({ boardState, highlightedFields, handleSelect }) => {
+const Fields = ({
+  boardState,
+  highlightedFields,
+  handleSelect,
+  resetHightlight,
+}) => {
   return (
     <>
       {GRID.map((row, i) => {
         return GRID.map((column, j) => {
-          const selected = highlightedFields?.includes([row, column])
-          const piece: Piece = boardState[row][column]
+          const selected = highlightedFields.some(
+            (move) => move[0] === row && move[1] === column
+          )
+          const piece: Piece | null = boardState[row][column]
           return (
             <Field
               selected={selected}
@@ -94,6 +109,7 @@ const Fields = ({ boardState, highlightedFields, handleSelect }) => {
               id={i + j}
               key={i + j}
               piece={piece}
+              resetHightlight={resetHightlight}
             />
           )
         })

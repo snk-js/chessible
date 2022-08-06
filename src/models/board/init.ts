@@ -19,6 +19,9 @@ const hosts = [...fieldHosts('b'), ...createVoid, ...fieldHosts('w', true)]
 export const initialize_board = (): Piece[][] => {
   const tmp = hosts
   return GRID.map((i) => {
-    return GRID.map((k) => new Piece(tmp.shift(), [i, k]))
+    return GRID.map((k) => {
+      const nextPiece = tmp.shift()
+      return nextPiece ? new Piece(nextPiece, [i, k]) : null
+    })
   })
 }
