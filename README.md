@@ -12,10 +12,9 @@ I don't know, doing this just for fun and learning.
 Further goals include gamefy as a platform for state-of-art user experience, with progressive improvements, status, item rarity, and different pieces to collect along with the time.
 
 ### technical differential features:
-#### --- Engine / Backend ---
-- (in development)
-- [x] basic layout for board, pieces and background
-- [x] scalable game initialization and movement setup
+#### `Engine / Backend`
+- [x] basic layout for board, pieces and background ✅
+- [x] scalable game initialization and movement setup ✅
 - [ ] setup turns
 - [ ] movement feature
 - [ ] attack feature
@@ -25,7 +24,7 @@ Further goals include gamefy as a platform for state-of-art user experience, wit
 - [ ] choose spending action points between before and after the next enemy turn
 - [ ] match with another online player
 
-#### --- User Experience / Frontend ---
+#### `User Experience / Frontend`
 - [ ] UI/UX layout
 - [ ] UI/UX
 - [ ] UI/UX panel
@@ -37,7 +36,7 @@ Further goals include gamefy as a platform for state-of-art user experience, wit
 - [ ] TODO: Plan AI to challenge humans
 - [ ] TODO: Plan Hero Journey on Plataform and storyline
 
-####  --- Web3 / Tokenomics ---
+####  `Web3 / Tokenomics`
 - [ ] apply marketplace strategy
 - [ ] connect wallet / vendors / deFi providers
 - [ ] TODO: finish roadmap
