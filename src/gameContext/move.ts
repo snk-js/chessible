@@ -56,7 +56,7 @@ const genMoves = (origin, directions, expand): Coordinates => {
       })
   return result.filter(
     (move) =>
-      !(move[0] < 0) && !(move[0] > 8) && !(move[1] < 0) && !(move[1] > 8)
+      !(move[0] < 0) && !(move[0] > 7) && !(move[1] < 0) && !(move[1] > 7)
   )
 }
 
@@ -65,6 +65,5 @@ export const genPossibleMoves = (piece: Piece) => {
   const pieceOrigin = piece.location
   const dir = getDirectionByPiece(pieceRole, pieceOrigin)
   const scalar_move = ['wb', 'wq', 'wr', 'bb', 'bq', 'br'].includes(pieceRole)
-  console.log({ dir })
   return genMoves(pieceOrigin, dir, scalar_move)
 }

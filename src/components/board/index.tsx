@@ -1,11 +1,9 @@
 import Field from '../field'
-import Image from 'next/image'
 
 import styled from 'styled-components'
 import { useContext, useEffect } from 'react'
 import { GameContext } from '@/gameContext/game'
 import { IBoardState } from '@/types/chess'
-import board from '@/assets/board.png'
 import Button from '@/components/button'
 import { useState } from 'react'
 import Piece from '@/models/piece'
@@ -23,15 +21,6 @@ const BoardFields = styled.div`
   }
 `
 
-const BackgroundBoard = styled.div`
-  position: absolute;
-  max-width: 40vw;
-  @media (max-width: 1280px) {
-    max-width: 80vw;
-  }
-  background: grey;
-  z-index: -1;
-`
 const Bar = styled.div`
   position: absolute;
   display: grid;

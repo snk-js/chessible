@@ -30,6 +30,7 @@ const Field = ({
   const handleClick = () => {
     piece ? handleSelect(piece?.moves([row, column])) : resetHightlight()
   }
+  const pieceImg = pieceState?.img
 
   return (
     <div
@@ -38,11 +39,15 @@ const Field = ({
       } ${selected ? 'bg-black' : ''}`}
       onClick={handleClick}
     >
-      {pieceState?.img && (
-        <div className=''>
-          <Image src={pieceState?.img} alt='' />
-        </div>
-      )}
+      {pieceImg ? <PieceImage img={pieceImg} /> : <></>}
+    </div>
+  )
+}
+
+const PieceImage = ({ img }) => {
+  return (
+    <div className=''>
+      <Image src={img} alt='' />
     </div>
   )
 }
