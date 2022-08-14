@@ -22,3 +22,9 @@ export const L = [
 export const DIAGONAL = [NORTH_EAST, NORTH_WEST, SOUTH_EAST, SOUTH_WEST]
 
 export const VERTICAL_HORIZONTAL = [NORTH, SOUTH, EAST, WEST]
+
+export const actions = {
+  att: 'yellow-500',
+  def: 'cyan-500',
+  move: 'green-500',
+}

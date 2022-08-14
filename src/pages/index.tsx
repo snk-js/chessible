@@ -3,7 +3,9 @@ import Board from '@/components/board'
 import { GameContextProvider } from '@/gameContext/game'
 import Dashboard from '@/components/dashboard'
 import styled from 'styled-components'
-import Image from 'next/image'
+import Bar from '@/components/Bar'
+import { TurnContextProvider } from '@/gameContext/turn'
+
 // import bgAsset from '@/assets/background/nightly.jpg'
 
 // const Shader = dynamic(() => import('@/components/canvas/Shader/Shader'), {
@@ -37,21 +39,16 @@ const Main = styled.div`
 // dom components goes here
 const Page = (props) => {
   return (
-    <GameContextProvider>
-      <Main>
-        <Dashboard>
-          <div
-            className='opacity-50 bg-slate-500'
-            style={{ width: '100%', height: '100%' }}
-          ></div>
-          <Board />
-          <div
-            className='opacity-50 bg-slate-500'
-            style={{ width: '100%', height: '100%' }}
-          ></div>
-        </Dashboard>
-      </Main>
-    </GameContextProvider>
+    <TurnContextProvider>
+      <GameContextProvider>
+        <Main>
+          <Dashboard>
+            <Bar />
+            <Board />
+          </Dashboard>
+        </Main>
+      </GameContextProvider>
+    </TurnContextProvider>
   )
 }
 

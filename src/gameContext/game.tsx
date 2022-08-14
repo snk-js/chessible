@@ -1,7 +1,8 @@
-import { createContext, useEffect } from 'react'
+import { createContext, useEffect, useContext } from 'react'
 import { useState } from 'react'
 import Board, { BoardFields } from '@/models/board'
 import Piece from '@/models/piece'
+import { TurnContext } from './turn'
 
 const GameContext = createContext(null)
 
@@ -13,9 +14,10 @@ type HightlighFeat = {
 }
 
 const GameContextProvider = ({ children }) => {
+  const { player, spendActionPoint } = useContext(TurnContext)
+
   const [board] = useState(new Board())
   const [boardState, setBoardState] = useState(board.state)
-  // const [countTurn, setCountTurn] = useState([{}])
 
   const [highlightedFields, setHighlightedFields] = useState<HightlighFeat>({
     moves: [],
@@ -30,8 +32,11 @@ const GameContextProvider = ({ children }) => {
   const handleSelectPiece = (position: [number, number]) => {
     const [row, column] = position
     const piece: Piece = boardState[row][column]
-    const moves: [number, number][] = piece.moves()
-    setHighlightedFields({ moves, piece })
+
+    if (piece.role.includes(player)) {
+      const moves: [number, number][] = piece.moves()
+      setHighlightedFields({ moves, piece })
+    }
   }
 
   const resetHightlight = () => {
@@ -44,6 +49,7 @@ const GameContextProvider = ({ children }) => {
 
   const movePieceTo = (origin: Vector, destination: Vector) => {
     setBoardState(board.movePieceTo(origin, destination))
+    spendActionPoint()
   }
 
   return (
