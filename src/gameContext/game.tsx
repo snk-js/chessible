@@ -36,7 +36,6 @@ const GameContextProvider = ({ children }) => {
 
     if (piece.role[0] === player) {
       const moves: [number, number][] = piece.moves(boardState)
-      console.log({ piece, moves })
       setHighlightedFields({ moves, piece })
     }
   }
