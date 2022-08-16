@@ -1,9 +1,13 @@
 import * as DIRECTIONS from '../constants'
 import Piece from '@/models/piece'
-type Vector = [number, number]
+import Board from '@/models/board'
+type Vector = number[]
 type Coordinates = Array<Vector>
 
-export const getDirectionByPiece = (piece: string, pieceOrigin: Vector) => {
+export const getDirectionByPiece = (
+  piece: string,
+  pieceOrigin: Vector
+): Coordinates => {
   if (piece === 'wp') {
     if (pieceOrigin[0] === 6) {
       return [
@@ -11,7 +15,11 @@ export const getDirectionByPiece = (piece: string, pieceOrigin: Vector) => {
         [-2, 0],
       ]
     } else {
-      return [[-1, 0]]
+      return [
+        [-1, 0],
+        [-1, 1],
+        [-1, -1],
+      ]
     }
   }
 
@@ -22,7 +30,11 @@ export const getDirectionByPiece = (piece: string, pieceOrigin: Vector) => {
         [2, 0],
       ]
     } else {
-      return [[1, 0]]
+      return [
+        [1, 0],
+        [1, 1],
+        [1, -1],
+      ]
     }
   } else {
     switch (piece[1]) {
@@ -40,30 +52,71 @@ export const getDirectionByPiece = (piece: string, pieceOrigin: Vector) => {
   }
 }
 
+const assertMove = (x, y, move) =>
+  x + move[0] >= 0 && y + move[1] >= 0 && x + move[0] <= 7 && y + move[1] <= 7
+
 const genMoves = (origin, directions, expand): Coordinates => {
   const result: Coordinates = []
 
   expand
     ? directions.map((move) => {
         let [x, y] = origin
-        while (x >= 0 && y >= 0 && x <= 7 && y <= 7) {
+        while (assertMove(x, y, move)) {
           result.push([(x += move[0]), (y += move[1])])
         }
       })
     : directions.map((move: [number, number]) => {
         let [x, y] = origin
-        result.push([(x += move[0]), (y += move[1])])
+        if (assertMove(x, y, move))
+          result.push([(x += move[0]), (y += move[1])])
       })
-  return result.filter(
-    (move) =>
-      !(move[0] < 0) && !(move[0] > 7) && !(move[1] < 0) && !(move[1] > 7)
-  )
+  return result
 }
 
-export const genPossibleMoves = (piece: Piece) => {
-  const pieceRole = piece.role
-  const pieceOrigin = piece.position
+const pieceColision = (
+  moves: Coordinates,
+  boardState: Board['state'],
+  directions: Coordinates,
+  scalar_move: boolean,
+  pieceOrigin: Vector
+) => {
+  const possibleMoves = []
+  const field: (dir: Vector) => Piece | null = (dir) => {
+    return boardState[dir[0]][dir[1]]
+  }
+
+  if (!scalar_move) {
+    moves.map((move) => {
+      !field(move) && possibleMoves.push(move)
+    })
+  } else {
+    directions.map((dir) => {
+      let [x, y] = pieceOrigin
+      while (assertMove(x, y, dir)) {
+        const notAllowedMove = field([(x += dir[0]), (y += dir[1])])
+        if (notAllowedMove) {
+          break
+        } else {
+          possibleMoves.push([x, y])
+        }
+      }
+    })
+  }
+  return possibleMoves
+}
+
+export const genPossibleMoves = (piece: Piece, boardState: Board['state']) => {
+  const pieceRole: string = piece.role
+  const pieceOrigin: Vector = piece.position
   const dir = getDirectionByPiece(pieceRole, pieceOrigin)
-  const scalar_move = ['wb', 'wq', 'wr', 'bb', 'bq', 'br'].includes(pieceRole)
-  return genMoves(pieceOrigin, dir, scalar_move)
+  const scalar_move = DIRECTIONS.scalars.includes(pieceRole)
+  const moves = genMoves(pieceOrigin, dir, scalar_move)
+  const possibleMoves = pieceColision(
+    moves,
+    boardState,
+    getDirectionByPiece(pieceRole, pieceOrigin),
+    scalar_move,
+    pieceOrigin
+  )
+  return possibleMoves
 }

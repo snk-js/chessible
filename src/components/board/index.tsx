@@ -1,10 +1,9 @@
 import Field from '../field'
 
 import styled from 'styled-components'
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { GameContext } from '@/gameContext/game'
-import Button from '@/components/button'
-import { useState } from 'react'
+
 import Piece from '@/models/piece'
 import { GameContextFeatures } from '@/gameContext/game'
 

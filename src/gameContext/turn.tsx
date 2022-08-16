@@ -11,20 +11,19 @@ type HightlighFeat = {
   piece: Piece
 }
 
+const defaultActionPoints = {
+  initial: ['move'],
+  futures: ['move/attack/defend', 'move/attack/defend'],
+}
+
 const TurnContextProvider = ({ children }) => {
   const [turn, setTurn] = useState(0)
   const [player, setPlayer] = useState('w')
 
-  const [actionPoints, setActionPoints] = useState({
-    initial: ['move'],
-    futures: ['move/attack/defend', 'move/attack/defend'],
-  })
+  const [actionPoints, setActionPoints] = useState(defaultActionPoints)
 
   const resetActionPoints = () => {
-    setActionPoints({
-      initial: ['move'],
-      futures: ['move/attack/defend', 'move/attack/defend'],
-    })
+    setActionPoints(defaultActionPoints)
   }
 
   useEffect(() => {

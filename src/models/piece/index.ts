@@ -30,8 +30,8 @@ class Piece {
     this.position = newPosition
   }
 
-  moves() {
-    return genPossibleMoves(this)
+  moves(boardState: (Piece | null)[][]) {
+    return genPossibleMoves(this, boardState)
   }
 }
 

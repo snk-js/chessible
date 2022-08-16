@@ -24,17 +24,19 @@ const GameContextProvider = ({ children }) => {
     piece: null,
   })
 
-  const isFieldHightLighted = (row, column) =>
-    highlightedFields.moves.some(
+  const isFieldHightLighted = (row, column) => {
+    return highlightedFields.moves.some(
       (move) => move[0] === row && move[1] === column
     )
+  }
 
   const handleSelectPiece = (position: [number, number]) => {
     const [row, column] = position
     const piece: Piece = boardState[row][column]
 
-    if (piece.role.includes(player)) {
-      const moves: [number, number][] = piece.moves()
+    if (piece.role[0] === player) {
+      const moves: [number, number][] = piece.moves(boardState)
+      console.log({ piece, moves })
       setHighlightedFields({ moves, piece })
     }
   }

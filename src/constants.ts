@@ -7,6 +7,8 @@ export const SOUTH = [0, -1]
 export const EAST = [1, 0]
 export const WEST = [-1, 0]
 
+export const scalars = ['wb', 'wq', 'wr', 'bb', 'bq', 'br']
+
 export const L = [
   [2, 1],
   [2, -1],
