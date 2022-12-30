@@ -111,10 +111,11 @@ export const genPossibleMoves = (piece: Piece, boardState: Board['state']) => {
   const dir = getDirectionByPiece(pieceRole, pieceOrigin)
   const scalar_move = DIRECTIONS.scalars.includes(pieceRole)
   const moves = genMoves(pieceOrigin, dir, scalar_move)
+
   const possibleMoves = pieceColision(
     moves,
     boardState,
-    getDirectionByPiece(pieceRole, pieceOrigin),
+    dir,
     scalar_move,
     pieceOrigin
   )
