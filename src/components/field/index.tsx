@@ -4,10 +4,11 @@ import { useEffect, useState } from 'react'
 import { useContext } from 'react'
 import { GameContext } from '@/gameContext/game'
 import { GameContextFeatures } from '@/gameContext/game'
+import styled from 'styled-components'
 
-type Vector = [number, number]
+type Vec2 = [number, number]
 type handleSelectArgs = {
-  moves: Vector[]
+  moves: Vec2[]
   piece: Piece | null
 }
 
@@ -54,16 +55,23 @@ const Field = ({ column, row, piece, id }: Field) => {
       } ${isHighlighted ? 'bg-black' : ''}`}
       onClick={handleClick}
     >
-      {pieceImg ? <PieceImage img={pieceImg} /> : <></>}
+      {pieceImg ? <FieldHandler img={pieceImg} /> : <></>}
     </div>
   )
 }
 
-const PieceImage = ({ img }) => {
+const ButtonField = styled.a`
+  background: #0000ff20;
+  display: block;
+  width: 100%;
+  height: 100%;
+`
+
+const FieldHandler = ({ img }) => {
   return (
-    <div className=''>
+    <ButtonField>
       <Image src={img} alt='' />
-    </div>
+    </ButtonField>
   )
 }
 

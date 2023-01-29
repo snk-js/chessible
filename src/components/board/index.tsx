@@ -11,13 +11,8 @@ const GRID = [0, 1, 2, 3, 4, 5, 6, 7]
 
 const BoardFields = styled.div`
   display: grid;
-  grid-template-columns: repeat(8, 5vw [grid-start]);
-  grid-template-rows: repeat(8, 5vw [grid-start]);
-  @media (max-width: 1280px) {
-    grid-template-columns: repeat(8, 10vw [grid-start]);
-    grid-template-rows: repeat(8, 10vw [grid-start]);
-    order: -1;
-  }
+  grid-template-columns: repeat(8, 4.5vw [grid-start]);
+  grid-template-rows: repeat(8, 4.5vw [grid-start]);
 `
 
 const Board = () => {

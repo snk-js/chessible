@@ -1,12 +1,12 @@
 import * as DIRECTIONS from '../constants'
 import Piece from '@/models/piece'
 import Board from '@/models/board'
-type Vector = number[]
-type Coordinates = Array<Vector>
+type Vec2 = number[]
+type Coordinates = Array<Vec2>
 
 export const getDirectionByPiece = (
   piece: string,
-  pieceOrigin: Vector
+  pieceOrigin: Vec2
 ): Coordinates => {
   if (piece === 'wp') {
     if (pieceOrigin[0] === 6) {
@@ -78,10 +78,10 @@ const pieceColision = (
   boardState: Board['state'],
   directions: Coordinates,
   scalar_move: boolean,
-  pieceOrigin: Vector
+  pieceOrigin: Vec2
 ) => {
   const possibleMoves = []
-  const field: (dir: Vector) => Piece | null = (dir) => {
+  const field: (dir: Vec2) => Piece | null = (dir) => {
     return boardState[dir[0]][dir[1]]
   }
 
@@ -107,7 +107,7 @@ const pieceColision = (
 
 export const genPossibleMoves = (piece: Piece, boardState: Board['state']) => {
   const pieceRole: string = piece.role
-  const pieceOrigin: Vector = piece.position
+  const pieceOrigin: Vec2 = piece.position
   const dir = getDirectionByPiece(pieceRole, pieceOrigin)
   const scalar_move = DIRECTIONS.scalars.includes(pieceRole)
   const moves = genMoves(pieceOrigin, dir, scalar_move)

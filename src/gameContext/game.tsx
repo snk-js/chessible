@@ -3,10 +3,10 @@ import { useState } from 'react'
 import Board, { BoardFields } from '@/models/board'
 import Piece from '@/models/piece'
 import { TurnContext } from './turn'
+import { Vec2 } from '@/models/board'
+import { selectPieceAndHighlight } from './utils'
 
 const GameContext = createContext(null)
-
-type Vector = [number, number]
 
 type HightlighFeat = {
   moves: [number, number][]
@@ -16,7 +16,7 @@ type HightlighFeat = {
 const GameContextProvider = ({ children }) => {
   const { player, spendActionPoint } = useContext(TurnContext)
 
-  const [board] = useState(new Board())
+  const [board, setBoard] = useState(new Board())
   const [boardState, setBoardState] = useState(board.state)
 
   const [highlightedFields, setHighlightedFields] = useState<HightlighFeat>({
@@ -24,20 +24,36 @@ const GameContextProvider = ({ children }) => {
     piece: null,
   })
 
+  useEffect(() => {
+    console.log(highlightedFields)
+  }, [highlightedFields])
+
   const isFieldHightLighted = (row, column) => {
     return highlightedFields.moves.some(
       (move) => move[0] === row && move[1] === column
     )
   }
 
-  const handleSelectPiece = (position: [number, number]) => {
-    const [row, column] = position
-    const piece: Piece = boardState[row][column]
-
-    if (piece.role[0] === player) {
-      const moves: [number, number][] = piece.moves(boardState)
-      setHighlightedFields({ moves, piece })
-    }
+  const handleSelectPiece = (position?: Vec2) => {
+    // if selected piece is equal to previously selected one
+    // -> reset field highlights
+    // reset highlights if there's same selection as before
+    // and as same selection plus highlighted fields are on
+    return (
+      (!(
+        position?.toString() === board?.selectedPiece?.toString() &&
+        highlightedFields.piece
+      ) &&
+        selectPieceAndHighlight({
+          board,
+          position,
+          player,
+          boardState,
+          setBoard,
+          setHighlightedFields,
+        })) ||
+      resetHightlight()
+    )
   }
 
   const resetHightlight = () => {
@@ -48,7 +64,7 @@ const GameContextProvider = ({ children }) => {
     setBoardState(board.flip().state)
   }
 
-  const movePieceTo = (origin: Vector, destination: Vector) => {
+  const movePieceTo = (origin: Vec2, destination: Vec2) => {
     setBoardState(board.movePieceTo(origin, destination))
     spendActionPoint()
   }
@@ -76,9 +92,9 @@ export type GameContextFeatures = {
   flipBoard: () => void
   highlightedFields: HightlighFeat
   resetHightlight: () => void
-  handleSelectPiece: (position: Vector) => void
+  handleSelectPiece: (position: Vec2) => void
   isFieldHightLighted: (row: number, column: number) => boolean
-  movePieceTo: (origin: Vector, destination: Vector) => void
+  movePieceTo: (origin: Vec2, destination: Vec2) => void
 }
 
 export { GameContextProvider, GameContext }

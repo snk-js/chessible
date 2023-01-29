@@ -4,7 +4,7 @@ import { useState } from 'react'
 
 const TurnContext = createContext(null)
 
-type Vector = [number, number]
+type Vec2 = [number, number]
 
 type HightlighFeat = {
   moves: [number, number][]

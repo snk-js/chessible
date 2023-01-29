@@ -3,7 +3,6 @@ import Board from '@/components/board'
 import { GameContextProvider } from '@/gameContext/game'
 import Dashboard from '@/components/dashboard'
 import styled from 'styled-components'
-import Bar from '@/components/Bar'
 import { TurnContextProvider } from '@/gameContext/turn'
 
 // import bgAsset from '@/assets/background/nightly.jpg'
@@ -43,7 +42,6 @@ const Page = (props) => {
       <GameContextProvider>
         <Main>
           <Dashboard>
-            <Bar />
             <Board />
           </Dashboard>
         </Main>

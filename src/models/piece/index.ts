@@ -1,18 +1,19 @@
 import { pieceImages } from './pieceImages'
 import { genPossibleMoves } from '@/gameContext/move'
-import { Vector } from '@/models/board'
+import { Vec2 } from '@/models/board'
 class Piece {
   img: string
   role: string // wb - (white bishop)
-  position: Vector
+  position: Vec2
+  selected: boolean
 
-  constructor(role: string, position: Vector) {
+  constructor(role: string, position: Vec2) {
     this.role = role
     this.img = pieceImages[role]
     this.position = position
   }
 
-  changePosition(position: Vector) {
+  changePosition(position: Vec2) {
     this.position = position
     return this
   }
@@ -26,12 +27,21 @@ class Piece {
     return this
   }
 
-  move(newPosition: Vector) {
+  move(newPosition: Vec2) {
     this.position = newPosition
   }
 
   moves(boardState: (Piece | null)[][]) {
     return genPossibleMoves(this, boardState)
+  }
+
+  select() {
+    this.selected = true
+    return this
+  }
+  unselect() {
+    this.selected = false
+    return this
   }
 }
 
