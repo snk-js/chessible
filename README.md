@@ -27,6 +27,24 @@ Chessible is an RPG-based gamification dApp of the classic chess game, dApp mean
    - 8.6 Special Rules: Special rules may be added for synthesized pieces, such as limiting the number of times they can be used in a game or prohibiting them from being broken down again.
 These rules provide a framework for the RPG chess game "Chessible" and offer players new ways to approach each turn, engage in strategic decision-making, and grow their knowledge structures.
 
+Gameplay:
+
+Every turn, players have a limited time to spend their action points by moving, attacking, or defending pieces, either as a present or future action.
+Present actions are immediately displayed after the end of the turn.
+Future actions are reserved until the end of the next opponent's turn and are displayed after that.
+Defense futures are special futures that can only be cast during the opponent's turn and are used to defend pieces from attacks.
+There is a special combination of futures, where players can spend action points on moving and attacking with the same piece in one turn.
+If a piece attacks another piece and kills it, it will take its position.
+If a piece attacks another piece and doesn't kill it, the position of both pieces remains the same.
+Piece Characteristics:
+
+Every piece has life points, attack points, defense points, agility points, and intelligence points.
+Life points represent the piece's capacity to handle attacks from other pieces.
+Attack points determine the amount of damage the piece can deal to other pieces.
+Defense points determine the piece's ability to absorb damage from enemy attacks. If an attacker's attack points are equal to or less than the defender's defense points, the defender will absorb all damage.
+Agility points determine a piece's ability to move freely on the board during the player's turn. Pieces with higher agility, such as knights, will require fewer action points to move or move more than once in a turn.
+Intelligence points determine a piece's ability to schedule futures (attacks and movements). If a future move collides with an unexpected enemy piece, it will cause normal damage and return to the last point it was at.
+
 <hr>
 
 ### WHAT I AM TRYING TO DO?
@@ -37,36 +55,6 @@ I don't know, doing this just for fun and learning.
 
 ### If Chessible receives approval, what then?
 Further goals include gamefy as a platform for state-of-art user experience, with progressive improvements, status, item rarity, and different pieces to collect along with the time.
-
-## Features / User Stories
-#### `Engine / Backend`
-- [x] basic layout for board, pieces and background ✅
-- [x] scalable game initialization and movement setup ✅
-- [ ] setup turns
-- [ ] movement feature
-- [ ] attack feature
-- [ ] defense feature
-- [ ] the ability to schedule attacks and defenses after the enemy plays
-- [ ] action points to spend between attack, defense, and movement
-- [ ] choose spending action points between before and after the next enemy turn
-- [ ] match with another online player
-
-#### `User Experience / Frontend`
-- [ ] UI/UX layout
-- [ ] UI/UX panel
-- [ ] use WebGL to render state-of-art panels, board and pieces
-- [ ] UI/UX collectible Boards and pieces
-- [ ] attack finalization, movement and defense effects
-- [ ] TODO: Plan pieces have characteristcs and traits
-- [ ] TODO: Plan gradual progress
-- [ ] TODO: Plan AI to challenge humans
-- [ ] TODO: Plan Hero Journey on Plataform and storyline
-
-####  `Web3 / Tokenomics`
-- [ ] apply marketplace strategy
-- [ ] connect wallet / vendors / deFi providers
-- [ ] TODO: finish roadmap
- 
 
 
 
