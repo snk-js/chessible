@@ -24,10 +24,6 @@ const GameContextProvider = ({ children }) => {
     piece: null,
   })
 
-  useEffect(() => {
-    console.log(highlightedFields)
-  }, [highlightedFields])
-
   const isFieldHightLighted = (row, column) => {
     return highlightedFields.moves.some(
       (move) => move[0] === row && move[1] === column
