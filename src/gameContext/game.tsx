@@ -24,8 +24,8 @@ const GameContextProvider = ({ children }) => {
     piece: null,
   })
 
-  const isFieldHightLighted = (row, column) => {
-    return highlightedFields.moves.some(
+  const highlightMove = (row, column) => {
+    return highlightedFields?.moves?.some(
       (move) => move[0] === row && move[1] === column
     )
   }
@@ -74,7 +74,7 @@ const GameContextProvider = ({ children }) => {
         resetHightlight,
         handleSelectPiece,
         highlightedFields,
-        isFieldHightLighted,
+        highlightMove,
         movePieceTo,
       }}
     >
@@ -89,7 +89,7 @@ export type GameContextFeatures = {
   highlightedFields: HightlighFeat
   resetHightlight: () => void
   handleSelectPiece: (position: Vec2) => void
-  isFieldHightLighted: (row: number, column: number) => boolean
+  highlightMove: (row: number, column: number) => boolean
   movePieceTo: (origin: Vec2, destination: Vec2) => void
 }
 

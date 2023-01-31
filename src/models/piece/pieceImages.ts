@@ -25,3 +25,5 @@ export const pieceImages = {
   bb,
   wb,
 }
+
+export type PieceRoles = keyof typeof pieceImages

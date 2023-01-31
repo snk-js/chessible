@@ -1,13 +1,25 @@
-import { Vec2 } from '@/models/board'
+import { BoardFields, Vec2 } from '@/models/board'
+import Board from '@/models/board'
+import Piece from '@/models/piece'
 
-export const selectPieceAndHighlight = ({
-  board,
-  position,
-  player,
-  boardState,
-  setBoard,
-  setHighlightedFields,
-}) => {
+type PieceSelectionInterface = {
+  board: Board
+  position: Vec2
+  player: 'w' | 'b'
+  boardState: BoardFields
+  setBoard: (board: Board) => void
+  setHighlightedFields: (moves: { moves: Vec2[]; piece: Piece }) => void
+}
+
+export const selectPieceAndHighlight = (props: PieceSelectionInterface) => {
+  const {
+    board,
+    position,
+    player,
+    boardState,
+    setBoard,
+    setHighlightedFields,
+  } = props
   try {
     setBoard(board.pieceSelection(position))
     if (board.selectedPiece) {

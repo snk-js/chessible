@@ -22,14 +22,14 @@ type Field = {
 const Field = ({ column, row, piece, id }: Field) => {
   const [pieceState, setPiece] = useState(piece)
   const {
-    isFieldHightLighted,
+    highlightMove,
     handleSelectPiece,
     resetHightlight,
     highlightedFields,
     movePieceTo,
   }: GameContextFeatures = useContext(GameContext)
 
-  const isHighlighted = isFieldHightLighted(row, column)
+  const isHighlighted = highlightMove(row, column)
 
   useEffect(() => {
     setPiece(piece)

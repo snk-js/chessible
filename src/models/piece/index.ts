@@ -1,13 +1,15 @@
-import { pieceImages } from './pieceImages'
+import { pieceImages, PieceRoles } from './pieceImages'
 import { genPossibleMoves } from '@/gameContext/move'
 import { Vec2 } from '@/models/board'
+import { StaticImageData } from 'next/image'
+
 class Piece {
-  img: string
-  role: string // wb - (white bishop)
+  img: StaticImageData
+  role: PieceRoles // wb - (white bishop)
   position: Vec2
   selected: boolean
 
-  constructor(role: string, position: Vec2) {
+  constructor(role: PieceRoles, position: Vec2) {
     this.role = role
     this.img = pieceImages[role]
     this.position = position
@@ -19,9 +21,9 @@ class Piece {
   }
 
   exchangeRole() {
-    const newRole = this.role.includes('w')
-      ? 'b' + this.role[1]
-      : 'w' + this.role[1]
+    const newRole: PieceRoles = (
+      this.role.includes('w') ? 'b' + this.role[1] : 'w' + this.role[1]
+    ) as PieceRoles
     this.role = newRole
     this.img = pieceImages[newRole]
     return this
