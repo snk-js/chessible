@@ -1,6 +1,7 @@
 import { BoardFields, Vec2 } from '@/models/board'
 import Board from '@/models/board'
 import Piece from '@/models/piece'
+import { Actions } from './move'
 
 type PieceSelectionInterface = {
   board: Board
@@ -8,7 +9,7 @@ type PieceSelectionInterface = {
   player: 'w' | 'b'
   boardState: BoardFields
   setBoard: (board: Board) => void
-  setHighlightedFields: (moves: { moves: Vec2[]; piece: Piece }) => void
+  setHighlightedFields: (moves: { piece: Piece } & Actions) => void
 }
 
 export const selectPieceAndHighlight = (props: PieceSelectionInterface) => {
@@ -25,8 +26,9 @@ export const selectPieceAndHighlight = (props: PieceSelectionInterface) => {
     if (board.selectedPiece) {
       const selectedPiece = board.getSelectedPiece()
       if (selectedPiece.role[0] === player) {
-        const moves: Vec2[] = selectedPiece.moves(boardState)
-        setHighlightedFields({ moves, piece: selectedPiece })
+        const moves: Actions = selectedPiece.moves(boardState)
+        console.log({ moves })
+        setHighlightedFields({ ...moves, piece: selectedPiece })
       }
     }
     return true

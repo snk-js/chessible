@@ -1,9 +1,14 @@
 import * as DIRECTIONS from '../constants'
 import Piece from '@/models/piece'
 import Board, { Vec2 } from '@/models/board'
+import { CollectionsBookmarkOutlined } from '@material-ui/icons'
 
 type Coordinates = Vec2[]
-type CollisionTargets = 'enemy' | 'ally'
+export type Actions = {
+  moves: (Vec2 | null)[]
+  defenses: (Vec2 | null)[]
+  attacks: (Vec2 | null)[]
+}
 
 export const getDirectionByPiece = (
   piece: string,
@@ -55,6 +60,10 @@ export const getDirectionByPiece = (
   }
 }
 
+const field = (dir: Vec2, boardState: Board['state']): Piece | null => {
+  return boardState[dir[0]][dir[1]]
+}
+
 const assertMove = (x, y, move) =>
   x + move[0] >= 0 && y + move[1] >= 0 && x + move[0] <= 7 && y + move[1] <= 7
 
@@ -79,34 +88,39 @@ const getMovesFiltered = (
 const genMoves = (origin, directions, expand): Coordinates =>
   getMovesFiltered(origin, expand, directions)
 
+const applyAllyFilter = (
+  moves: Coordinates,
+  boardState: Board['state'],
+  pieceOrigin: Vec2
+) => {
+  const current = (dir: Vec2) => field(dir, boardState)
+  const origin = current(pieceOrigin)
+  return moves.filter((position: Vec2) => {
+    const [x, y] = position
+    return boardState[x][y]?.role[0] === origin?.role[0]
+  })
+}
+
 const pieceColision = (
   moves: Coordinates,
   boardState: Board['state'],
   directions: Coordinates,
   scalar_move: boolean,
-  pieceOrigin: Vec2,
-  collisionTarget?: CollisionTargets
+  pieceOrigin: Vec2
 ): Vec2[] => {
   const possibleMoves = []
 
-  const field: (dir: Vec2) => Piece | null = (dir) => {
-    return boardState[dir[0]][dir[1]]
-  }
-
-  const getPieceRole = (origin: Vec2) => {
-    const piece = field(origin)
-    return piece.role[0]
-  }
+  const fieldCurrentState = (dir: Vec2) => field(dir, boardState)
 
   if (!scalar_move) {
     moves.map((move) => {
-      !field(move) && possibleMoves.push(move)
+      !field(move, boardState) && possibleMoves.push(move)
     })
   } else {
     directions.map((dir) => {
       let [x, y] = pieceOrigin
       while (assertMove(x, y, dir)) {
-        const notAllowedMove = field([(x += dir[0]), (y += dir[1])])
+        const notAllowedMove = fieldCurrentState([(x += dir[0]), (y += dir[1])])
         if (notAllowedMove) {
           break
         } else {
@@ -121,14 +135,14 @@ const pieceColision = (
 export const genPossibleMoves = (
   piece: Piece,
   boardState: Board['state']
-): Vec2[] => {
+): Actions => {
   const pieceRole: string = piece.role
   const pieceOrigin: Vec2 = piece.position
   const dir = getDirectionByPiece(pieceRole, pieceOrigin)
   const scalar_move = DIRECTIONS.scalars.includes(pieceRole)
   const moves = genMoves(pieceOrigin, dir, scalar_move)
 
-  const pieceActions = pieceColision(
+  const availablePositions = pieceColision(
     moves,
     boardState,
     dir,
@@ -136,5 +150,13 @@ export const genPossibleMoves = (
     pieceOrigin
   )
 
-  return pieceActions
+  const availableDefenses = applyAllyFilter(moves, boardState, pieceOrigin)
+
+  const actions = {
+    moves: availablePositions,
+    defenses: availableDefenses,
+    attacks: [],
+  }
+
+  return actions
 }

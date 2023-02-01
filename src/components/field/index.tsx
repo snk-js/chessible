@@ -5,6 +5,7 @@ import { useContext } from 'react'
 import { GameContext } from '@/gameContext/game'
 import { GameContextFeatures } from '@/gameContext/game'
 import styled from 'styled-components'
+import { AddModeratorOutlined } from '@mui/icons-material/'
 
 type Vec2 = [number, number]
 type handleSelectArgs = {
@@ -27,9 +28,11 @@ const Field = ({ column, row, piece, id }: Field) => {
     resetHightlight,
     highlightedFields,
     movePieceTo,
+    highlightDefenses,
   }: GameContextFeatures = useContext(GameContext)
 
   const isHighlighted = highlightMove(row, column)
+  const isPieceGetDefended = highlightDefenses(row, column)
 
   useEffect(() => {
     setPiece(piece)
@@ -52,16 +55,22 @@ const Field = ({ column, row, piece, id }: Field) => {
     <div
       className={`border border-[#30ffff] ${
         id % 2 !== 0 ? 'bg-[#09ffff2f]' : ''
-      } ${isHighlighted ? 'bg-black' : ''}`}
+      } ${isHighlighted && 'bg-[#75ffb870]'}
+        ${isPieceGetDefended && 'bg-[#00309970]'}
+      `}
       onClick={handleClick}
     >
+      {isPieceGetDefended && (
+        <div className='absolute animate-pulse z-[1000]'>
+          <AddModeratorOutlined htmlColor='#003099' />
+        </div>
+      )}
       {pieceImg ? <FieldHandler img={pieceImg} /> : <></>}
     </div>
   )
 }
 
 const ButtonField = styled.a`
-  background: #0000ff20;
   display: block;
   width: 100%;
   height: 100%;

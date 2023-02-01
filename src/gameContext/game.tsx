@@ -5,13 +5,13 @@ import Piece from '@/models/piece'
 import { TurnContext } from './turn'
 import { Vec2 } from '@/models/board'
 import { selectPieceAndHighlight } from './utils'
+import { Actions } from './move'
 
 const GameContext = createContext(null)
 
 type HightlighFeat = {
-  moves: [number, number][]
   piece: Piece
-}
+} & Actions
 
 const GameContextProvider = ({ children }) => {
   const { player, spendActionPoint } = useContext(TurnContext)
@@ -21,12 +21,20 @@ const GameContextProvider = ({ children }) => {
 
   const [highlightedFields, setHighlightedFields] = useState<HightlighFeat>({
     moves: [],
+    defenses: [],
+    attacks: [],
     piece: null,
   })
 
   const highlightMove = (row, column) => {
     return highlightedFields?.moves?.some(
       (move) => move[0] === row && move[1] === column
+    )
+  }
+
+  const highlightDefenses = (row: number, column: number) => {
+    return highlightedFields?.defenses?.some(
+      (ally) => ally[0] === row && ally[1] === column
     )
   }
 
@@ -53,7 +61,7 @@ const GameContextProvider = ({ children }) => {
   }
 
   const resetHightlight = () => {
-    setHighlightedFields({ moves: [], piece: null })
+    setHighlightedFields({ moves: [], piece: null, defenses: [], attacks: [] })
   }
 
   const flipBoard = () => {
@@ -76,6 +84,7 @@ const GameContextProvider = ({ children }) => {
         highlightedFields,
         highlightMove,
         movePieceTo,
+        highlightDefenses,
       }}
     >
       {children}
@@ -90,6 +99,7 @@ export type GameContextFeatures = {
   resetHightlight: () => void
   handleSelectPiece: (position: Vec2) => void
   highlightMove: (row: number, column: number) => boolean
+  highlightDefenses: (row: number, column: number) => boolean
   movePieceTo: (origin: Vec2, destination: Vec2) => void
 }
 
