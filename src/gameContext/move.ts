@@ -1,7 +1,6 @@
 import * as DIRECTIONS from '../constants'
 import Piece from '@/models/piece'
 import Board, { Vec2 } from '@/models/board'
-import { CollectionsBookmarkOutlined } from '@material-ui/icons'
 
 type Coordinates = Vec2[]
 export type Actions = {

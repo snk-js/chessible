@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { GameContext } from '@/gameContext/game'
 import { GameContextFeatures } from '@/gameContext/game'
 import styled from 'styled-components'
-import { AddModeratorOutlined } from '@mui/icons-material/'
+import { HeatMapOutlined } from '@ant-design/icons'
 
 type Vec2 = [number, number]
 type handleSelectArgs = {
@@ -54,15 +54,15 @@ const Field = ({ column, row, piece, id }: Field) => {
   return (
     <div
       className={`border border-[#30ffff] ${
-        id % 2 !== 0 ? 'bg-[#09ffff2f]' : ''
-      } ${isHighlighted && 'bg-[#75ffb870]'}
-        ${isPieceGetDefended && 'bg-[#00309970]'}
+        id % 2 !== 0 ? 'bg-[#09ffff50]' : ''
+      } ${isHighlighted && 'bg-[#75ffb8]'}
+        ${isPieceGetDefended && 'bg-[#00309990]'}
       `}
       onClick={handleClick}
     >
       {isPieceGetDefended && (
         <div className='absolute animate-pulse z-[1000]'>
-          <AddModeratorOutlined htmlColor='#003099' />
+          <HeatMapOutlined />
         </div>
       )}
       {pieceImg ? <FieldHandler img={pieceImg} /> : <></>}
