@@ -15,6 +15,7 @@ const BoardFields = styled.div`
   grid-template-columns: repeat(8, 4.5vw [grid-start]);
   grid-template-rows: repeat(8, 4.5vw [grid-start]);
 `
+const Menu = styled.div``
 
 const Board = () => {
   const { boardState, flipBoard }: GameContextFeatures = useContext(GameContext)
@@ -31,6 +32,7 @@ const Board = () => {
         </BackgroundBoard> */}
         <Fields boardState={boardState} />
       </BoardFields>
+      <Menu id={'side-menu'} />
     </>
   )
 }

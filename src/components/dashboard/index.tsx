@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 const StyledDashboard = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   padding-top: 3rem;
