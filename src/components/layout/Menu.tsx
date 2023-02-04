@@ -88,16 +88,4 @@ const MenuStats: React.FC = () => {
   )
 }
 
-const Comp = () => {
-  return (
-    <div
-      style={{
-        width: '100%',
-        height: '100%',
-        background: '#ff36bf50',
-      }}
-    ></div>
-  )
-}
-
 export default MenuStats
