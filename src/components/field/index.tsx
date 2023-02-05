@@ -53,10 +53,10 @@ const Field = ({ column, row, piece, id }: Field) => {
 
   return (
     <div
-      className={`border border-[#30ffff] ${
+      className={`border border-[#30ffff]  ${
         id % 2 !== 0 ? 'bg-[#09ffff50]' : ''
-      } ${isHighlighted && 'bg-[#75ffb8]'}
-        ${isPieceGetDefended && 'bg-[#00309990]'}
+      } ${isHighlighted && 'bg-[#75ffb8] animate-pulse'}
+        ${isPieceGetDefended && 'bg-[#00309990] animate-pulse'}
       `}
       onClick={handleClick}
     >

@@ -1,11 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
-} from '@ant-design/icons'
 import type { MenuProps } from 'antd'
 import { Layout, Menu } from 'antd'
 import styled from 'styled-components'
@@ -54,14 +47,14 @@ function getItem(
 }
 
 const items: MenuItem[] = [
-  getItem('', '1', <Progress actionPoints={40} total={90} />),
+  getItem('', '1', <Progress actionPoints={1} total={90} />),
 ]
 
 const MenuStats: React.FC = () => {
   const [collapsed, setCollapsed] = useState(true)
 
   const handleCollapse = (e) => {
-    setCollapsed(false)
+    // setCollapsed(false)
   }
 
   const ref = useRef(null)
