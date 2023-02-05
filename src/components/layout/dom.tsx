@@ -9,8 +9,16 @@ import { createPortal } from 'react-dom'
 const ImageHandler = ({ className }: { className? }) => (
   <Image className={className} src={bgimg} alt='' />
 )
+
 const BackgroundContainer = styled(ImageHandler)`
   // transform: translate(0, -20rem);
+`
+
+const StyledMenu = styled(Menu)`
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 const Background = ({ children }) => {
@@ -39,7 +47,7 @@ const Dom = ({ children }) => {
     >
       <Background>
         {children}
-        {menu && createPortal(<Menu />, menu)}
+        {menu && createPortal(<StyledMenu />, menu)}
       </Background>
     </div>
   )

@@ -61,8 +61,8 @@ const Field = ({ column, row, piece, id }: Field) => {
       onClick={handleClick}
     >
       {isPieceGetDefended && (
-        <div className='absolute animate-pulse z-[1000]'>
-          <HeatMapOutlined />
+        <div className='absolute animate-pulse'>
+          <HeatMapOutlined style={{ color: '#d5f090', fontSize: '1.3rem' }} />
         </div>
       )}
       {pieceImg ? <FieldHandler img={pieceImg} /> : <></>}
