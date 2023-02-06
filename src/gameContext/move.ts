@@ -1,6 +1,8 @@
 import * as DIRECTIONS from '../constants'
 import Piece from '@/models/piece'
 import Board, { Vec2 } from '@/models/board'
+import { Characters } from '@/models/character/class'
+import Character from '@/models/character'
 
 type Coordinates = Vec2[]
 export type Actions = {
@@ -59,7 +61,7 @@ export const getDirectionByPiece = (
   }
 }
 
-const field = (dir: Vec2, boardState: Board['state']): Piece | null => {
+const field = (dir: Vec2, boardState: Board['state']): Character | null => {
   return boardState[dir[0]][dir[1]]
 }
 
@@ -84,8 +86,11 @@ const getMovesFiltered = (
   return result
 }
 
-const genMoves = (origin, directions, expand): Coordinates =>
-  getMovesFiltered(origin, expand, directions)
+const genMoves = (
+  origin: Vec2,
+  directions: Vec2[],
+  expand: boolean
+): Coordinates => getMovesFiltered(origin, expand, directions)
 
 const applyAllyFilter = (
   moves: Coordinates,
@@ -131,25 +136,23 @@ const pieceColision = (
   return possibleMoves
 }
 
-export const genPossibleMoves = (
-  piece: Piece,
-  boardState: Board['state']
-): Actions => {
-  const pieceRole: string = piece.role
-  const pieceOrigin: Vec2 = piece.position
-  const dir = getDirectionByPiece(pieceRole, pieceOrigin)
-  const scalar_move = DIRECTIONS.scalars.includes(pieceRole)
-  const moves = genMoves(pieceOrigin, dir, scalar_move)
+export const genPossibleMoves = (position: Vec2, board: Board): Actions => {
+  const char: Character = board.getPiece(position)
+  const { role, position: origin } = char
+
+  const dir = getDirectionByPiece(role, origin)
+  const scalar_move = DIRECTIONS.scalars.includes(role)
+  const moves = genMoves(origin, dir, scalar_move)
 
   const availablePositions = pieceColision(
     moves,
-    boardState,
+    board['state'],
     dir,
     scalar_move,
-    pieceOrigin
+    origin
   )
 
-  const availableDefenses = applyAllyFilter(moves, boardState, pieceOrigin)
+  const availableDefenses = applyAllyFilter(moves, board['state'], origin)
 
   const actions = {
     moves: availablePositions,

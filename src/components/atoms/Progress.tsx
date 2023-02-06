@@ -6,9 +6,14 @@ import { Button } from 'antd'
 type ProgressProps = {
   actionPoints: number
   total: number
+  handleEndTurn: () => void
 }
 
-const Mana: React.FC<ProgressProps> = ({ actionPoints, total }) => {
+const Mana: React.FC<ProgressProps> = ({
+  actionPoints,
+  total,
+  handleEndTurn,
+}) => {
   const [showPlay, setShowPlay] = useState(false)
 
   const handleOnMouseOver = () => {
@@ -26,6 +31,7 @@ const Mana: React.FC<ProgressProps> = ({ actionPoints, total }) => {
       type='primary'
       onMouseOver={handleOnMouseOver}
       onMouseOut={handleOnMouseOut}
+      onClick={handleEndTurn}
     >
       <Progress
         className={'motion-safe:animate-pulse z-50'}

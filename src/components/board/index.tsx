@@ -4,8 +4,8 @@ import styled from 'styled-components'
 import { useContext } from 'react'
 import { GameContext } from '@/gameContext/game'
 
-import Piece from '@/models/piece'
 import { GameContextFeatures } from '@/gameContext/game'
+import Character from '@/models/character'
 
 const GRID = [0, 1, 2, 3, 4, 5, 6, 7]
 
@@ -42,7 +42,7 @@ const Fields = ({ boardState }) => {
     <>
       {GRID.map((row, i) => {
         return GRID.map((column, j) => {
-          const piece: Piece | null = boardState[row][column]
+          const piece: Character | null = boardState[row][column]
           return (
             <Field
               column={column}

@@ -1,6 +1,14 @@
 import { Vec2 } from '.'
 import { BoardFields } from '@/models/board'
-import Piece from '@/models/piece'
+import { Characters } from '../character/class'
+import Character from '../character'
+
+export const getPiece = (
+  position: Vec2,
+  boardState: BoardFields
+): Character | null => {
+  return boardState[position[0]][position[1]]
+}
 
 export const swapPiece = (
   origin: Vec2,
@@ -17,7 +25,7 @@ export const swapPiece = (
 
 export const changePiece = (
   origin: Vec2,
-  piece: Piece,
+  piece: Character,
   boardState: BoardFields
 ) => {
   const [row, column] = origin
@@ -26,8 +34,8 @@ export const changePiece = (
 }
 
 export const resetPiecesSelection = (boardState: BoardFields) =>
-  boardState.map((row: (Piece | null)[]) => {
-    return row.map((piece, column) => {
+  boardState.map((row: (Character | null)[]) => {
+    return row.map((piece) => {
       return piece && piece.unselect()
     })
   })

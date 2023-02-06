@@ -13,21 +13,14 @@ type PieceSelectionInterface = {
 }
 
 export const selectPieceAndHighlight = (props: PieceSelectionInterface) => {
-  const {
-    board,
-    position,
-    player,
-    boardState,
-    setBoard,
-    setHighlightedFields,
-  } = props
+  const { board, position, player, setBoard, setHighlightedFields } = props
   try {
-    setBoard(board.pieceSelection(position))
-    if (board.selectedPiece) {
-      const selectedPiece = board.getSelectedPiece()
-      if (selectedPiece.role[0] === player) {
-        const moves: Actions = selectedPiece.moves(boardState)
-        console.log({ moves })
+    const newState = board.pieceSelection(position)
+    setBoard(newState)
+    if (newState.selectedPiece) {
+      const selectedPiece = newState.getSelectedPiece()
+      if (selectedPiece.clan === player) {
+        const moves: Actions = selectedPiece.moves(newState)
         setHighlightedFields({ ...moves, piece: selectedPiece })
       }
     }

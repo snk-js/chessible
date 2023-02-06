@@ -1,9 +1,7 @@
 import dynamic from 'next/dynamic'
 import Board from '@/components/board'
-import { GameContextProvider } from '@/gameContext/game'
 import Dashboard from '@/components/dashboard'
 import styled from 'styled-components'
-import { TurnContextProvider } from '@/gameContext/turn'
 
 // import bgAsset from '@/assets/background/nightly.jpg'
 
@@ -38,15 +36,11 @@ const Main = styled.div`
 // dom components goes here
 const Page = (props) => {
   return (
-    <TurnContextProvider>
-      <GameContextProvider>
-        <Main>
-          <Dashboard>
-            <Board />
-          </Dashboard>
-        </Main>
-      </GameContextProvider>
-    </TurnContextProvider>
+    <Main>
+      <Dashboard>
+        <Board />
+      </Dashboard>
+    </Main>
   )
 }
 

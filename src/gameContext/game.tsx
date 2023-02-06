@@ -6,6 +6,7 @@ import { TurnContext } from './turn'
 import { Vec2 } from '@/models/board'
 import { selectPieceAndHighlight } from './utils'
 import { Actions } from './move'
+import Character from '@/models/character'
 
 const GameContext = createContext(null)
 
@@ -64,9 +65,9 @@ const GameContextProvider = ({ children }) => {
     setHighlightedFields({ moves: [], piece: null, defenses: [], attacks: [] })
   }
 
-  const flipBoard = () => {
-    setBoardState(board.flip().state)
-  }
+  // const flipBoard = () => {
+  //   setBoardState(board.flip().state)
+  // }
 
   const movePieceTo = (origin: Vec2, destination: Vec2) => {
     setBoardState(board.movePieceTo(origin, destination))
@@ -77,7 +78,7 @@ const GameContextProvider = ({ children }) => {
     <GameContext.Provider
       value={{
         boardState,
-        flipBoard,
+        // flipBoard,
         // field
         resetHightlight,
         handleSelectPiece,

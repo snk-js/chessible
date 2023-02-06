@@ -6,17 +6,13 @@ import { GameContext } from '@/gameContext/game'
 import { GameContextFeatures } from '@/gameContext/game'
 import styled from 'styled-components'
 import { HeatMapOutlined } from '@ant-design/icons'
-
-type Vec2 = [number, number]
-type handleSelectArgs = {
-  moves: Vec2[]
-  piece: Piece | null
-}
+import { Characters } from '@/models/character/class'
+import Character from '@/models/character'
 
 type Field = {
   column: number
   row: number
-  piece: Piece | null
+  piece: Character | null
   id: number
 }
 

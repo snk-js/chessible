@@ -1,8 +1,10 @@
 import Piece from '@/models/piece'
+import Character from '../character'
+import { Characters } from '../character/class'
 import { initialize_board } from './init'
-import { swapPiece, changePiece, resetPiecesSelection } from './utils'
+import { swapPiece, changePiece, resetPiecesSelection, getPiece } from './utils'
 
-export type BoardFields = (Piece | null)[][]
+export type BoardFields = (Character | null)[][]
 export type Vec2 = [number, number]
 
 class Board {
@@ -19,16 +21,19 @@ class Board {
     return this.state
   }
 
-  changeOnePiece(origin, piece: Piece) {
+  changeOnePiece(origin, piece: Character) {
     this.state = changePiece(origin, piece, this.state)
     return this
   }
 
   pieceSelection(origin?: Vec2) {
+    this.getPiece(origin)
+
     // if has origin add it to board selected piece
     // if origin is the same has selected piece, unselected it
     // if has origin selected piece is not the same, update the board
     this.resetPiecesSelection()
+
     return (
       (this.selectedPiece &&
         this.getPiece(origin).position.toString() ===
@@ -40,8 +45,7 @@ class Board {
   }
 
   getPiece(origin: Vec2) {
-    const piece = this.state[origin[0]][origin[1]]
-    return origin && piece
+    return origin && getPiece(origin, this.state)
   }
 
   resetPiecesSelection() {
@@ -52,18 +56,18 @@ class Board {
     return this.getPiece(this.selectedPiece)
   }
 
-  flip() {
-    const newState = []
-    this.state.map((row: Piece[]) => {
-      newState.push(
-        row.map((piece: Piece) => {
-          return piece?.exchangeRole()
-        })
-      )
-    })
-    this.state = newState
-    return this
-  }
+  // flip() {
+  //   const newState = []
+  //   this.state.map((row: Piece[]) => {
+  //     newState.push(
+  //       row.map((piece: Piece) => {
+  //         return piece?.replaceSides()
+  //       })
+  //     )
+  //   })
+  //   this.state = newState
+  //   return this
+  // }
 }
 
 export default Board

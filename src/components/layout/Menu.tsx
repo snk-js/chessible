@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState, useContext } from 'react'
 import type { MenuProps } from 'antd'
 import { Layout, Menu } from 'antd'
 import styled from 'styled-components'
 import Progress from '@/components/atoms/Progress'
+import { TurnContextFeatures, TurnContext } from '@/gameContext/turn'
 
 const { Sider } = Layout
 
@@ -46,12 +47,21 @@ function getItem(
   } as MenuItem
 }
 
-const items: MenuItem[] = [
-  getItem('', '1', <Progress actionPoints={1} total={90} />),
-]
-
 const MenuStats: React.FC = () => {
   const [collapsed, setCollapsed] = useState(true)
+  const { changeTurn }: TurnContextFeatures = useContext(TurnContext)
+
+  const handleEndTurn = () => {
+    changeTurn()
+  }
+
+  const items: MenuItem[] = [
+    getItem(
+      '',
+      '1',
+      <Progress handleEndTurn={handleEndTurn} actionPoints={1} total={90} />
+    ),
+  ]
 
   const handleCollapse = (e) => {
     // setCollapsed(false)

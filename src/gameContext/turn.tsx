@@ -67,6 +67,8 @@ const TurnContextProvider = ({ children }) => {
   )
 }
 
-export type TurnContextFeatures = {}
+export type TurnContextFeatures = {
+  changeTurn: () => void
+}
 
 export { TurnContextProvider, TurnContext }
