@@ -1,6 +1,7 @@
 import Piece from '@/models/piece'
 import Character from '../character'
 import { Characters } from '../character/class'
+import { Black, White } from '../character/side'
 import { initialize_board } from './init'
 import { swapPiece, changePiece, resetPiecesSelection, getPiece } from './utils'
 
@@ -14,6 +15,8 @@ class Board {
   constructor() {
     this.state = initialize_board()
     this.selectedPiece = null
+    Black.clean()
+    White.clean()
   }
 
   movePieceTo(origin: Vec2, destination: Vec2) {

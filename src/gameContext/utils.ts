@@ -19,6 +19,7 @@ export const selectPieceAndHighlight = (props: PieceSelectionInterface) => {
     setBoard(newState)
     if (newState.selectedPiece) {
       const selectedPiece = newState.getSelectedPiece()
+      console.log({ selectedPiece })
       if (selectedPiece.clan === player) {
         const moves: Actions = selectedPiece.moves(newState)
         setHighlightedFields({ ...moves, piece: selectedPiece })

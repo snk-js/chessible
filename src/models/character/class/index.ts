@@ -1,71 +1,64 @@
 import Character from '..'
+import { Black, CharSide, Side, White } from '../side'
 
-class Knight {
-  static instances: Knight[] = []
-  constructor(character: Character) {
-    Knight.instances.push(this)
+import { CharactersConstructor } from '..'
+
+export class CharacterClass {
+  side: CharSide
+  constructor(character: Character, side: CharSide) {
+    this.side = side
+
+    const sameClassCount = (side.constructor as typeof CharSide).ally[
+      this.constructor.name
+    ].length
+
     character?.changeId(
-      character.clan +
-        '-' +
-        this.constructor.name +
-        '' +
-        Knight.instances.length
+      character.clan + '-' + this.constructor.name + '-' + sameClassCount
+      // '-' +
+      // this.constructor.instances.length
     )
+  }
+}
+
+class Knight extends CharacterClass {
+  constructor(side: CharSide, char: Character) {
+    super(char, side)
     return this
   }
 }
 
-class Bishop {
-  static instances: Bishop[] = []
-  constructor(character: Character) {
-    Bishop.instances.push(this)
-    character?.changeId(
-      character.clan +
-        '-' +
-        this.constructor.name +
-        '' +
-        Bishop.instances.length
-    )
+class Bishop extends CharacterClass {
+  constructor(side: CharSide, char: Character) {
+    super(char, side)
+    this.side = side
     return this
   }
 }
 
-class Queen {
-  static instances: Queen[] = []
-  constructor(character: Character) {
-    Queen.instances.push(this)
-    character?.changeId(
-      character.clan + '-' + this.constructor.name + '' + Queen.instances.length
-    )
+class Queen extends CharacterClass {
+  constructor(side: CharSide, char: Character) {
+    super(char, side)
     return this
   }
 }
 
-class Pawn {
-  static instances: Pawn[] = []
-  constructor(character: Character) {
-    Pawn.instances.push(this)
-    character?.changeId(
-      character.clan + '-' + this.constructor.name + '' + Pawn.instances.length
-    )
+class Pawn extends CharacterClass {
+  constructor(side: CharSide, char: Character) {
+    super(char, side)
     return this
   }
 }
 
-class Rook {
-  static instances: Rook[] = []
-  constructor(character: Character) {
-    Rook.instances.push(this)
-    character?.changeId(
-      character.clan + '-' + this.constructor.name + '' + Rook.instances.length
-    )
+class Rook extends CharacterClass {
+  constructor(side: CharSide, char: Character) {
+    super(char, side)
     return this
   }
 }
 
-class King {
-  constructor(character: Character) {
-    character.changeId(character.clan + '-' + this.constructor.name)
+class King extends CharacterClass {
+  constructor(side: CharSide, char: Character) {
+    super(char, side)
     return this
   }
 }
@@ -73,3 +66,16 @@ class King {
 export { Knight, Bishop, Queen, Pawn, Rook, King }
 
 export type Characters = Knight | Bishop | Queen | Pawn | Rook | King
+
+export function DeclaredCharacter(
+  charType: CharactersConstructor<Side, Character>,
+  charStats: Character
+): CharSide {
+  if (charStats.clan === 'b') {
+    return new Black(charType, charStats)
+  }
+
+  if (charStats.clan === 'w') {
+    return new White(charType, charStats)
+  }
+}

@@ -3,9 +3,15 @@ import Piece from '../piece'
 import { pieceImages, PieceRoles } from '@/models/piece/pieceImages'
 import * as classes from './class'
 import { StaticImageData } from 'next/image'
-
+import { DeclaredCharacter } from './class'
 export type Clan = 'w' | 'b'
 export type Classes = 'k' | 'n' | 'p' | 'r' | 'b' | 'q'
+import { Black, Side, White } from './side'
+
+export type CharactersConstructor<
+  S extends Side = Side,
+  C extends Character = Character
+> = new (side: S, char: C) => classes.Characters
 
 // Character is a Facade model for
 // developing the essense behavior
@@ -15,7 +21,7 @@ class Character extends Piece {
   clan: Clan
   id: string
   img: StaticImageData
-  class: classes.Characters
+  class: classes.Characters | Side
 
   constructor(position: Vec2, role: PieceRoles) {
     super(position)
@@ -27,17 +33,17 @@ class Character extends Piece {
 
     switch (classs) {
       case 'n':
-        return (this.class = new classes.Knight(this)) && this
+        return (this.class = DeclaredCharacter(classes.Knight, this)) && this
       case 'p':
-        return (this.class = new classes.Pawn(this)) && this
+        return (this.class = DeclaredCharacter(classes.Pawn, this)) && this
       case 'r':
-        return (this.class = new classes.Rook(this)) && this
+        return (this.class = DeclaredCharacter(classes.Rook, this)) && this
       case 'q':
-        return (this.class = new classes.Queen(this)) && this
+        return (this.class = DeclaredCharacter(classes.Queen, this)) && this
       case 'k':
-        return (this.class = new classes.King(this)) && this
+        return (this.class = DeclaredCharacter(classes.King, this)) && this
       case 'b':
-        return (this.class = new classes.Bishop(this)) && this
+        return (this.class = DeclaredCharacter(classes.Bishop, this)) && this
       default:
         return this
     }
