@@ -49,10 +49,10 @@ Intelligence points determine a piece's ability to schedule futures (attacks and
 <hr>
 
 ### WHAT I AM TRYING TO DO?
-I'm trying to make a chess game from scratch, but with additional features to make the game more dynamic and creative rather than purely logical and intricate. As the community around chess game grows, it is common to get bored with the always same game style, and chess players have an urge to expand their creativity into tactics. Furthermore, with the decentralized internet coming strong to ease virtual assets management, the platform also intends to make a collection of rare pieces and boards available and optionally gamble in matches against other players.
+I'm trying to make a chess game from scratch, but with additional features to make the game more dynamic and creative rather than purely logical and intricate. As the community around chess game grows, it is common to get bored with the always same game style, and chess players have an urge to expand their creativity into tactics. Furthermore, with the decentralized internet coming strong to ease virtual assets management, the platform also intends to make a collection of rare pieces and boards available and optionally gamble in matches against other players, the only way of one could cheat is with it's own creativity and experience.
 
 ### Why would people like such a bizarre thing?
-I don't know, doing this just for fun and learning.
+This would be a game that I would play to get better, because brings the familiarity of chess plus the nostalgia of classic RPG's played in life.
 
 ### If Chessible receives approval, what then?
 Further goals include gamefy as a platform for state-of-art user experience, with progressive improvements, status, item rarity, and different pieces to collect along with the time.
