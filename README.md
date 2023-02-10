@@ -3,7 +3,7 @@
 Chessible is an RPG-based gamification dApp of the classic chess game, dApp means that you will be able to earn in the game. Within an RPG-based style approach, players have action points to distribute every turn between pieces' movement, attack, and defense - before and after the enemy plays as a pre-moved strategy, hence, creative, frenzied, and 100x more appealing to the classic chess. 
 
 this is more or less how would be, drawing by hand a simulated pawn vs pawn in a 4x4 grid.
-[Imgur](https://imgur.com/3HbY4Av)
+![caption](https://imgur.com/3HbY4Av)
 
 1. Board: The game is played on an 8x8 square board with the same initial setup of pieces as traditional chess.
 2. Life Points: Every piece has a set number of life points.
