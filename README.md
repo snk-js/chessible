@@ -5,6 +5,19 @@ Chessible is an RPG-based gamification dApp of the classic chess game, dApp mean
 this is more or less how would be, drawing by hand a simulated pawn vs pawn in a 4x4 grid.
 <img src="/public/4x4pawn_vs_pawn.gif" width="400px" height="400px" />
 
+main rules of the game: 
+
+- The game is turn-based and played between two players.
+- Each player has 3 action points to spend each turn on their pieces' abilities: attack, defense, and move.
+- The first turn is taken by player A who spends their 3 points, and then player B takes their turn and spends their 3 points.
+- After the end of the second turn, the present actions and defenses chosen in the turn are displayed, along with the combination of the past (player A) future actions.
+- Players can use their actions to perform a chain attack, chained attack + move, move + attack, etc.
+- Defense can only be used once and will prevent all attacks for the upcoming enemy turn.
+- Attacks and move can be either present or future and can be stacked with defense to perform a strategy.
+- Each piece can make only one present move and the other moves can be future moves or all futures.
+- Attacks for each piece can be one present or all futures or a combination of both.
+- The order precedence of each action is defense, followed by attacks, and then future moves and attacks of the other player's past turn.
+
 1. Board: The game is played on an 8x8 square board with the same initial setup of pieces as traditional chess.
 2. Life Points: Every piece has a set number of life points.
 3. Actions: Every turn, players have a set number of action points, similar to the game "Hearthstone". Players can spend their action points on the following actions:
