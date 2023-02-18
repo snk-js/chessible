@@ -8,7 +8,7 @@ this is more or less how would be, drawing by hand a simulated pawn vs pawn in a
 main rules of the game: 
 
 - The game is turn-based and played between two players.
-- Each player has 3 action points to spend each turn on their pieces' abilities: attack, defense, and move.
+- Each player has 3 (or more) action points to spend each turn on their pieces' abilities: attack, defense, and move.
 - The first turn is taken by player A who spends their 3 points, and then player B takes their turn and spends their 3 points.
 - After the end of the second turn, the present actions and defenses chosen in the turn are displayed, along with the combination of the past (player A) future actions.
 - Players can use their actions to perform a chain attack, chained attack + move, move + attack, etc.
