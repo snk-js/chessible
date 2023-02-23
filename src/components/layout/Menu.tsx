@@ -8,7 +8,7 @@ import { TurnContextFeatures, TurnContext } from '@/gameContext/turn'
 const { Sider } = Layout
 
 const LayoutStyled: typeof Layout = styled(Layout)`
-  min-height: 80vh;
+  min-height: 20vw;
   background: transparent;
 
   > aside {
@@ -49,18 +49,14 @@ function getItem(
 
 const MenuStats: React.FC = () => {
   const [collapsed, setCollapsed] = useState(true)
-  const { changeTurn }: TurnContextFeatures = useContext(TurnContext)
+  const { changeTurn, points }: TurnContextFeatures = useContext(TurnContext)
 
   const handleEndTurn = () => {
     changeTurn()
   }
 
   const items: MenuItem[] = [
-    getItem(
-      '',
-      '1',
-      <Progress handleEndTurn={handleEndTurn} actionPoints={1} total={90} />
-    ),
+    getItem('', '1', <Progress handleEndTurn={handleEndTurn} {...points} />),
   ]
 
   const handleCollapse = (e) => {

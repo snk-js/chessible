@@ -1,7 +1,5 @@
 import * as DIRECTIONS from '../constants'
-import Piece from '@/models/piece'
 import Board, { Vec2 } from '@/models/board'
-import { Characters } from '@/models/character/class'
 import Character from '@/models/character'
 
 type Coordinates = Vec2[]

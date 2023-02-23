@@ -14,8 +14,6 @@ export class CharacterClass {
 
     character?.changeId(
       character.clan + '-' + this.constructor.name + '-' + sameClassCount
-      // '-' +
-      // this.constructor.instances.length
     )
   }
 }

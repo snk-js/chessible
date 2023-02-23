@@ -6,7 +6,6 @@ import { GameContext } from '@/gameContext/game'
 import { GameContextFeatures } from '@/gameContext/game'
 import styled from 'styled-components'
 import { HeatMapOutlined } from '@ant-design/icons'
-import { Characters } from '@/models/character/class'
 import Character from '@/models/character'
 
 type Field = {

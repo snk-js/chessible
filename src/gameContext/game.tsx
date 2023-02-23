@@ -6,7 +6,6 @@ import { TurnContext } from './turn'
 import { Vec2 } from '@/models/board'
 import { selectPieceAndHighlight } from './utils'
 import { Actions } from './move'
-import Character from '@/models/character'
 
 const GameContext = createContext(null)
 

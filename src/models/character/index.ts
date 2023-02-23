@@ -6,7 +6,7 @@ import { StaticImageData } from 'next/image'
 import { DeclaredCharacter } from './class'
 export type Clan = 'w' | 'b'
 export type Classes = 'k' | 'n' | 'p' | 'r' | 'b' | 'q'
-import { Black, Side, White } from './side'
+import { Side } from './side'
 
 export type CharactersConstructor<
   S extends Side = Side,
