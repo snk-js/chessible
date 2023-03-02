@@ -1,5 +1,6 @@
-import { middlewares } from './middlewares'
+import { middleware } from './middlewares'
 import { create } from 'zustand'
+import { Actions, Action } from './actions'
 
 type PlayerSide = 'w' | 'b'
 
@@ -10,7 +11,7 @@ interface Player {
     total: number
   },
   spendPoints: (cost: number) => void,
-  reset: () => void
+  resetPoints: () => void,
 }
 
 
@@ -25,20 +26,20 @@ const player = (side: PlayerSide, set) => ({
       state.points.actionPoints = state.points.actionPoints - cost
     }),
 
-  reset: () => set(
+  resetPoints: () => set(
     (state) => {
       state.points.actionPoints = state.points.total
     }
-  )
+  ),
 })
 
-export const w = create(middlewares<Player>((set) => player('w', set)))
-export const b = create(middlewares<Player>((set) => player('b', set)))
+export const w = create(middleware<Player>((set) => player('w', set)))
+export const b = create(middleware<Player>((set) => player('b', set)))
 
 const players = { w, b }
 
 export const clear = (side: PlayerSide) => {
-  return players[side].getState().reset()
+  return players[side].getState().resetPoints()
 }
 
 export const spend = (side: PlayerSide, cost: 30) => {

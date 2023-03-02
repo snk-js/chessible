@@ -1,18 +1,21 @@
 import { create } from "zustand"
-import { middlewares } from "./middlewares"
+import { Action } from "./actions";
+import { middleware } from "./middlewares"
 
 
 type PlayerSide = 'w' | 'b'
 
 export interface turn {
   current: PlayerSide,
-  next: () => void,
+  next: (actions: Action[]) => void,
+
 }
 
-export const useTurn = create(middlewares((set) => ({
+export const useTurn = create(middleware<turn>((set) => ({
   current: 'w',
-  next: () => set((state) => {
-    state.current = state.current === 'w' ? 'b' : 'w'
+  next: (actions) => set((state) => {
+    state.current = state.current === 'w' ? 'b' : 'w';
+
   })
 })))
 

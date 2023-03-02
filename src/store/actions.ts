@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 import { Vec2 } from '@/models/board'
-import { middlewares } from './middlewares'
+import { middleware } from './middlewares'
 
 const chessCoordinates = [
   'A',
@@ -21,49 +21,42 @@ const rpgChessActions = [
   'ax'
 ] as const
 
-type Actions = {
+type Action = {
   actor: Vec2,
   action: keyof typeof rpgChessActions,
   target: Vec2
 }
 
-export interface Action {
-  sequence: Array<Actions>,
+export interface Actions {
+  sequence: Array<Action>,
   back: () => void,
   spend: (actor: Vec2, action: keyof typeof rpgChessActions, target: Vec2) => void,
   reset: () => void
 }
 
-export const useActions = create(middlewares<Action>((set) => ({
+export const useActions = create(middleware<Actions>((set) => ({
   sequence: [],
   spend: (actor: Vec2, action: keyof typeof rpgChessActions, target: Vec2) => set(
-    (state: Action) => {
+    (state: Actions) => {
       state.sequence.push({ actor, action, target })
     }
   ),
 
   back: () => set(
-    (state: Action) => {
+    (state: Actions) => {
       state.sequence.pop()
     }
   ),
 
   reset: () => set(
-    (state: Action) => {
+    (state: Actions) => {
       state.sequence = []
     }
   )
 })))
 
 
-export interface Action {
-  sequence: Array<Actions>,
-  back: () => void,
-  spend: (actor: Vec2, action: keyof typeof rpgChessActions, target: Vec2) => void,
-  reset: () => void
-}
-
-export const playOne = ({ actor, action, target }: Actions) => {
+export const playOne = ({ actor, action, target }: Action) => {
   const actions = useActions.getState()
   actions.spend(actor, action, target)
 }
