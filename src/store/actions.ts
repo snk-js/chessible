@@ -21,10 +21,11 @@ const rpgChessActions = [
   'ax'
 ] as const
 
-type Action = {
+export type Action = {
   actor: Vec2,
   action: keyof typeof rpgChessActions,
   target: Vec2
+  neighbors?: number[]
 }
 
 export interface Actions {

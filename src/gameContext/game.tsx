@@ -1,10 +1,13 @@
-import { createContext, useEffect, useContext } from 'react'
+import { createContext } from 'react'
 import { useState } from 'react'
 import Board, { BoardFields } from '@/models/board'
 import Piece from '@/models/piece'
 import { Vec2 } from '@/models/board'
 import { selectPieceAndHighlight } from './utils'
 import { Actions } from './move'
+import { useTurn } from '@/store/turn'
+import { Side } from '@/models/character/side'
+import { useActions } from '@/store/actions'
 
 const GameContext = createContext(null)
 
@@ -15,6 +18,15 @@ type HightlighFeat = {
 const GameContextProvider = ({ children }) => {
   const [board, setBoard] = useState(new Board())
   const [boardState, setBoardState] = useState(board.state)
+
+  // turn
+  const current = useTurn.subscribe((state) => state.current)
+  const next = useTurn((state) => state.next)
+
+  // action
+
+  const spend = 
+
 
   const [highlightedFields, setHighlightedFields] = useState<HightlighFeat>({
     moves: [],
@@ -48,9 +60,11 @@ const GameContextProvider = ({ children }) => {
         selectPieceAndHighlight({
           board,
           position,
+          player: current,
           boardState,
           setBoard,
           setHighlightedFields,
+          
         })) ||
       resetHightlight()
     )
@@ -71,6 +85,8 @@ const GameContextProvider = ({ children }) => {
   return (
     <GameContext.Provider
       value={{
+        next,
+        current,
         boardState,
         // flipBoard,
         // field
@@ -96,6 +112,11 @@ export type GameContextFeatures = {
   highlightMove: (row: number, column: number) => boolean
   highlightDefenses: (row: number, column: number) => boolean
   movePieceTo: (origin: Vec2, destination: Vec2) => void
+
+  //turn
+  next: () => void
+  current: Side
+
 }
 
 export { GameContextProvider, GameContext }
