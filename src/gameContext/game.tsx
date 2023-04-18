@@ -5,7 +5,7 @@ import Piece from '@/models/piece'
 import { Vec2 } from '@/models/board'
 import { selectPieceAndHighlight } from './utils'
 import { Actions } from './move'
-import { useTurn } from '@/store/turn'
+import { PlayerSide, useTurn } from '@/store/turn'
 import { Side } from '@/models/character/side'
 import { useActions } from '@/store/actions'
 
@@ -20,13 +20,10 @@ const GameContextProvider = ({ children }) => {
   const [boardState, setBoardState] = useState(board.state)
 
   // turn
-  const current = useTurn.subscribe((state) => state.current)
+  const current = useTurn.getState().current
   const next = useTurn((state) => state.next)
 
   // action
-
-  const spend = 
-
 
   const [highlightedFields, setHighlightedFields] = useState<HightlighFeat>({
     moves: [],
@@ -64,7 +61,6 @@ const GameContextProvider = ({ children }) => {
           boardState,
           setBoard,
           setHighlightedFields,
-          
         })) ||
       resetHightlight()
     )
@@ -116,7 +112,6 @@ export type GameContextFeatures = {
   //turn
   next: () => void
   current: Side
-
 }
 
 export { GameContextProvider, GameContext }

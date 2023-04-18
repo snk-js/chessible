@@ -6,6 +6,7 @@ import Dom from '@/components/layout/dom'
 import '@/styles/index.css'
 import dynamic from 'next/dynamic'
 import { GameContextProvider } from '@/gameContext/game'
+
 const LCanvas = dynamic(() => import('@/components/layout/canvas'), {
   ssr: false,
 })
@@ -20,11 +21,11 @@ function App({ Component, pageProps = { title: 'index' } }) {
   return (
     <>
       <Header title={pageProps.title} />
-        <GameContextProvider>
-          <Dom>
-            <Component {...pageProps} />
-          </Dom>
-        </GameContextProvider>
+      <GameContextProvider>
+        <Dom>
+          <Component {...pageProps} />
+        </Dom>
+      </GameContextProvider>
       {/* {Component?.r3f && <LCanvas>{Component.r3f(pageProps)}</LCanvas>} */}
     </>
   )
