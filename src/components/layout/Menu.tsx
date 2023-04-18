@@ -3,7 +3,8 @@ import type { MenuProps } from 'antd'
 import { Layout, Menu } from 'antd'
 import styled from 'styled-components'
 import Progress from '@/components/atoms/Progress'
-import { useTurn } from '@/store/turn'
+
+import { GameContext } from '@/gameContext/game'
 
 const { Sider } = Layout
 
@@ -49,10 +50,11 @@ function getItem(
 
 const MenuStats: React.FC = () => {
   const [collapsed, setCollapsed] = useState(true)
-  const turn = useTurn()
+
+  const { next } = useContext(GameContext)
 
   const handleEndTurn = () => {
-    turn.next()
+    next()
   }
 
   const items: MenuItem[] = [

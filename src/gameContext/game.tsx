@@ -1,4 +1,4 @@
-import { createContext } from 'react'
+import { createContext, useEffect } from 'react'
 import { useState } from 'react'
 import Board, { BoardFields } from '@/models/board'
 import Piece from '@/models/piece'
@@ -20,8 +20,12 @@ const GameContextProvider = ({ children }) => {
   const [boardState, setBoardState] = useState(board.state)
 
   // turn
-  const current = useTurn.getState().current
+  const current = useTurn((state) => state.current)
   const next = useTurn((state) => state.next)
+
+  useEffect(() => {
+    console.log(current)
+  }, [current])
 
   // action
 
